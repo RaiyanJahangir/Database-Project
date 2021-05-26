@@ -1,2 +1,24 @@
-hello
-hii mumuuuu!!!
+create table person
+(
+    person_id nvarchar2(64) constraint person_person_id_pk primary key,
+    person_name nvarchar2(64)not null,
+    person_email nvarchar2(64),
+    person_password nvarchar2(64),
+    person_phonenumber nvarchar2(64),
+    person_profession nvarchar2(64),
+    person_dob date not null,
+    person_height numeric(12) not null,
+    person_weight numeric(12) not null,
+    person_no_of_donation numeric(12) default 0,
+    person_bloodgroup nvarchar2(64) not null,
+    person_gender nvarchar2(64) not null ,
+    person_age numeric(12) not null,
+    person_prevhistory nvarchar2(64),
+    person_chronicdis nvarchar2(64),
+    person_apartment nvarchar2(64),
+    person_street nvarchar2(64),
+    person_city nvarchar2(64),
+    person_portal nvarchar2(64),
+    person_no_of_purchase numeric(12) default 0,
+    person_birth_certificate_no nvarchar2(64) constraint person_birth_certificate_uk unique
+);
