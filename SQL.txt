@@ -40,3 +40,42 @@ create table eligibility_test
     platelets_eligibility nvarchar2(64),
     cryo_eligibility nvarchar2(64)
 );
+
+create table event
+(event_id      numeric(12) not null, 
+ event_name  varchar(64) not null,
+ event_location varchar(64) not null,
+primary key (event_id )
+);
+
+
+create table organization
+(org_id      numeric(12) not null, 
+ org_contact  varchar(64) not null,
+ org_city varchar(64) not null,
+ org_postal varchar(64) not null,
+ org_branch varchar(64) not null,
+ org_street varchar(64) not null,
+ org_name varchar(64) not null,
+ org_no_of_purchase numeric(12) default 0,
+primary key (org_id )
+);
+
+create table medical_officer
+(medical_officer_officer_name  varchar(64) not null, 
+ medical_officer_officer_contract_end_time  varchar(64),
+ medical_officer_officer_joining_date varchar(64) not null,
+ medical_officer_officer_id numeric(12) not null,
+primary key (medical_officer_officer_id )
+);
+
+create table tester
+    (test_id  numeric(12) not null, 
+     tester_result   varchar(64) default null,
+     medical_officer_officer_id numeric(12) not null,
+     primary key (test_id, medical_officer_officer_id),
+     foreign key (test_id) references eligibility_test(test_id)
+        on delete cascade,
+     foreign key (medical_officer_officer_id) references medical_officer
+(medical_officer_officer_id) on delete cascade
+    );
