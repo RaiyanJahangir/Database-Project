@@ -41,44 +41,54 @@ create table eligibility_test
     cryo_eligibility nvarchar2(64)
 );
 
-create table event
-(event_id      numeric(12) not null, 
- event_name  varchar(64) not null,
- event_location varchar(64) not null,
-primary key (event_id )
+create table event(
+ event_id      nvarchar2(64) not null, 
+ event_name  nvarchar2(64) not null,
+ event_location nvarchar2(64) not null,
+ CONSTRAINT event_id_pk PRIMARY KEY (event_id)
 );
 
 
-create table organization
-(org_id      numeric(12) not null, 
- org_contact  varchar(64) not null,
- org_city varchar(64) not null,
- org_postal varchar(64) not null,
- org_branch varchar(64) not null,
- org_street varchar(64) not null,
- org_name varchar(64) not null,
- org_no_of_purchase numeric(12) default 0,
-primary key (org_id )
+
+create table organization(
+ org_id      nvarchar2(64) not null, 
+ org_contact  nvarchar2(64) not null,
+ org_city nvarchar2(64) not null,
+ org_postal nvarchar2(64) not null,
+ org_branch nvarchar2(64) not null,
+ org_street nvarchar2(64) not null,
+ org_name nvarchar2(64) not null,
+ org_no_of_purchase number default 0,
+ 
+ CONSTRAINT organization_org_id_pk PRIMARY KEY (org_id)
 );
 
-create table medical_officer
-(medical_officer_officer_name  varchar(64) not null, 
- medical_officer_officer_contract_end_time  varchar(64),
- medical_officer_officer_joining_date varchar(64) not null,
- medical_officer_officer_id numeric(12) not null,
-primary key (medical_officer_officer_id )
+
+create table medical_officer(
+       medical_officer_id nvarchar2(64) not null,
+       medical_officer_name  nvarchar2(64) not null, 
+       medical_officer_contracttime  date,
+       medical_officer_joindate date not null,
+ 
+ 
+ CONSTRAINT medical_officer_id_pk PRIMARY KEY (medical_officer_id)
+     
 );
 
-create table tester
-    (test_id  numeric(12) not null, 
-     tester_result   varchar(64) default null,
-     medical_officer_officer_id numeric(12) not null,
-     primary key (test_id, medical_officer_officer_id),
-     foreign key (test_id) references eligibility_test(test_id)
-        on delete cascade,
-     foreign key (medical_officer_officer_id) references medical_officer
-(medical_officer_officer_id) on delete cascade
-    );
+
+create table tester(
+
+     test_id  nvarchar2(64) not null, 
+     tester_result   nvarchar2(64) default null,
+     medical_officer_id number not null,
+     
+     CONSTRAINT tester_medical_officer_id_fk FOREIGN KEY (medical_officer_id)
+     REFERENCES medical_officer(medical_officer_id) on delete set null,
+     
+     CONSTRAINT tester_test_id_fk FOREIGN KEY (test_id)
+     REFERENCES eligibility_test(test_id) on delete set null
+);
+
 
 create table donation_request
 (
@@ -86,3 +96,86 @@ create table donation_request
     request_date date,
     request_state nvarchar2(64)
 );
+
+
+
+create table purchase_request(
+     purchase_billing_id nvarchar2(64) not null,
+     purchase_org_id nvarchar2(64) not null,
+     purchase_person_id nvarchar2(64),
+     
+     purchase_request_id nvarchar2(64) not null,
+     purchase_request_status nvarchar2(64),
+     purchase_reason nvarchar2(64) not null,
+     purchase_request_date date,
+     purchase_desired_product nvarchar2(64),
+     
+     CONSTRAINT purchase_request_id_pk PRIMARY KEY (purchase_request_id),
+     
+     CONSTRAINT purchase_billing_id_fk FOREIGN KEY (purchase_billing_id)
+     REFERENCES billing(billing_id) on delete set null,
+     
+     CONSTRAINT purchase_org_id_fk FOREIGN KEY (purchase_org_id)
+     REFERENCES organization(org_id) on delete set null,
+     
+     CONSTRAINT purchase_person_id_fk FOREIGN KEY (purchase_person_id)
+     REFERENCES person(person_id) on delete set null
+
+);
+create table billing(
+     billing_id nvarchar2(64),
+     billing_total_amount number default 0,
+     billing_payment_date date,
+     billing_transaction_id nvarchar2(64),
+     CONSTRAINT billing_id_pk PRIMARY KEY (billing_id)
+);
+
+create table blood_bank(
+     blood_bank_event_id nvarchar2(64),
+     blood_request_id nvarchar2(64),
+     blood_bank_donor_id nvarchar2(64),
+     blood_bank_patient_id nvarchar2(64),
+     blood_Bank_test_id nvarchar2(64),
+
+     blood_bank_blood_bag_id nvarchar2(64),
+     blood_bank_blood_group nvarchar2(10),
+     blood_bank_blood_type nvarchar2(64),
+     blood_datedonation date ,
+     blood_bank_total_no number,
+     blood_expiration_date date,
+     
+     CONSTRAINT blood_bank_bag_id_pk PRIMARY KEY (blood_bank_blood_bag_id),
+     
+     CONSTRAINT blood_bank_event_id_fk FOREIGN KEY (blood_bank_event_id)
+     REFERENCES event(event_id) on delete set null,
+     
+     CONSTRAINT blood_bank_request_id_fk FOREIGN KEY (blood_request_id)
+     REFERENCES purchase_request(purchase_request_id) on delete set null,
+     
+     CONSTRAINT blood_bank_donor_id_fk FOREIGN KEY (blood_bank_donor_id)
+     REFERENCES person(person_id) on delete set null,
+     
+     CONSTRAINT blood_bank_patient_id_fk FOREIGN KEY (blood_bank_patient_id)
+     REFERENCES person(person_id) on delete set null,
+     
+     CONSTRAINT blood_Bank_test_id_fk FOREIGN KEY (blood_Bank_test_id)
+     REFERENCES eligibility_test(test_id) on delete set null
+    
+     
+);
+create table eligibility(
+     eligibility_person_id nvarchar2(64),
+     eligibility_request_id nvarchar2(64),
+     eligibility_test_id nvarchar2(64),
+     
+     
+     CONSTRAINT eligibility_person_id_fk FOREIGN KEY (eligibility_person_id)
+     REFERENCES person(person_id) on delete set null,
+     
+     CONSTRAINT eligibility_test_id_fk FOREIGN KEY (eligibility_test_id)
+     REFERENCES eligibility_test( test_id) on delete set null,
+     
+     CONSTRAINT eligibility_request_id_fk FOREIGN KEY (eligibility_request_id)
+     REFERENCES donation_request(request_id) on delete set null
+);
+
