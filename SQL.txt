@@ -22,3 +22,21 @@ create table person
     person_no_of_purchase numeric(12) default 0,
     person_birth_certificate_no nvarchar2(64) constraint person_birth_certificate_uk unique
 );
+
+create table eligibility_test
+(
+    test_id nvarchar2(64) constraint eligibility_test_test_id_pk primary key,
+    screening_test_hepatitis_b nvarchar2(64),
+    screening_test_hepatitis_c nvarchar2(64),
+    screening_test_hiv nvarchar2(64),
+    screening_test_syphilis nvarchar2(64),
+    test_date date,
+    state nvarchar2(64),
+    last_date_of_donation date,
+    whole_blood_eligibility nvarchar2(64),
+    plasma_eligibility nvarchar2(64),
+    rbc_eligibility nvarchar2(64),
+    wbc_eligibility nvarchar2(64),
+    platelets_eligibility nvarchar2(64),
+    cryo_eligibility nvarchar2(64)
+);
