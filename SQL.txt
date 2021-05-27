@@ -79,3 +79,10 @@ create table tester
      foreign key (medical_officer_officer_id) references medical_officer
 (medical_officer_officer_id) on delete cascade
     );
+
+create table donation_request
+(
+    request_id nvarchar2(64) constraint donation_request_request_id_pk primary key,
+    request_date date,
+    request_state nvarchar2(64)
+);
