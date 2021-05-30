@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.butbox {
+  width: 426px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #ff61241f;
+  border-radius: 30px;
+}
+
+.togbtn {
+  padding: 10px 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+}
+#bton {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 213px;
+  height: 100%;
+  background: linear-gradient(to right, #ff105f, #ffad06);
+  border-radius: 30px;
+  transition: 0.15s;
+}
+</style>
+</head>
+<body>
+    <?php
+    include "header.php"
+    ?>
+<!-- Contact Section -->
+<img style="margin: 0px auto" src="images/Organization login/1.png" class="img-responsive" alt="Appointment">
+<div class="butbox">
+                <div id="bton"></div>
+                <button type="button" class="togbtn" onclick="person()" style="width: 200px; color: black">Register as a person</button>
+                <button type="button" class="togbtn" onclick="organization()" style="width: 213px;color: black">Register from an organization</button>
+            </div>
+            <div id="h1" style="display: block;">
+                <?php
+                    include "person-signup.php"
+                ?>
+            </div>
+            <div id="h2" style="display: none;">
+                <?php
+                    include "Organizationsignup.php"
+                ?>
+            </div>
+</div>
+<!--====  End of Contact Form  ====-->
+            <?php
+    include "footer.php"
+    ?>
+     <script>
+            var x = document.getElementById("h1");
+            var y = document.getElementById("h2");
+            var z=document.getElementById("btn");
+        function organization(){
+            z.style.left = "+213px"
+            y.style.display="block";
+            y.style.color="white";
+            x.style.display = "none";
+        }
+        function person() {
+            z.style.left = "+0px"
+            x.style.display = "block";
+            y.style.display = "none";
+        }
+        </script>
+</body>
+</html>
