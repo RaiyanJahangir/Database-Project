@@ -12,7 +12,7 @@ create table person
     person_no_of_donation numeric(12) default 0,
     person_bloodgroup nvarchar2(64) not null,
     person_gender nvarchar2(64) not null ,
-    person_age numeric(12) not null,
+    person_age numeric(12) null,
     person_prevhistory nvarchar2(64),
     person_chronicdis nvarchar2(64),
     person_apartment nvarchar2(64),
@@ -22,6 +22,19 @@ create table person
     person_no_of_purchase numeric(12) default 0,
     person_birth_certificate_no nvarchar2(64) constraint person_birth_certificate_uk unique
 );
+
+--Id generation for person (sequence and trigger)
+create sequence person_id_gen start with 1; 
+
+CREATE OR REPLACE TRIGGER person_bir 
+BEFORE INSERT ON person 
+FOR EACH ROW
+
+BEGIN
+  SELECT person_id_gen.NEXTVAL
+  INTO   :new.person_id
+  FROM   dual;
+END;
 
 create table eligibility_test
 (

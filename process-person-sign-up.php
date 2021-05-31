@@ -43,6 +43,7 @@ if(isset($_POST['save']))
 	if ($result) {
 				echo "Data added Successfully !";
 				//include_once 'show.php';
+				include_once 'login.php';
 				exit();
 	}
 	else{
