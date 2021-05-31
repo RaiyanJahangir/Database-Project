@@ -72,9 +72,21 @@ create table organization(
  org_street nvarchar2(64) not null,
  org_name nvarchar2(64) not null,
  org_no_of_purchase number default 0,
- 
+ org_pass nvarchar2(64) not null,
  CONSTRAINT organization_org_id_pk PRIMARY KEY (org_id)
 );
+
+CREATE OR REPLACE TRIGGER org_bir 
+BEFORE INSERT ON organization 
+FOR EACH ROW
+
+BEGIN
+  SELECT org_id_gen.NEXTVAL
+  INTO   :new.org_id
+  FROM   dual;
+END;
+
+create sequence org_id_gen start with 1;
 
 
 create table medical_officer(
