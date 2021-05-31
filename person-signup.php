@@ -11,7 +11,7 @@
                     <br>
                     <br>
                     <!-- contact form start -->
-                    <form action="#" class="row" method="post">
+                    <form action="process-person-sign-up.php" class="row" method="post">
                         <!-- name -->
                         <div class="col-md-6">
                             <label for="exampleSelect1">Name</label>
@@ -116,8 +116,8 @@
                         <input style="padding-top: 2%; height: 5%;" name="percity" type="text"class="form-control main" placeholder="City" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="exampleSelect1">Portal</label>
-                        <input style="padding-top: 2%; height: 5%;" type="text" name="perportal" class="form-control main" placeholder="Portal" required>
+                        <label for="exampleSelect1">Postal</label>
+                        <input style="padding-top: 2%; height: 5%;" type="text" name="perportal" class="form-control main" placeholder="Postal" required>
                     </div>
 
                     <!-- Password -->
@@ -126,7 +126,7 @@
                             <i class="fa fa-lock text-muted"></i>
                             <label for="exampleSelect1">Password </label>
                         </span>
-                        <input type="password" id="pass" class="form-control main" name="password" id="myInput" required>
+                        <input type="password" id="pass" class="form-control main" name="perpassword" id="myInput" required>
                         <!--<input type="checkbox" onclick="myFunction()"> show pass-->
                     </div>
                     <div class="col-md-12">
@@ -134,14 +134,14 @@
                             <i class="fa fa-lock text-muted"></i> 
                             <label for="exampleSelect1">Password Confirmation</label>
                         </span>
-                        <input type="password" id="confirmpass" class="form-control main" name="confirmpassword" id="myInput" required>
+                        <input type="password" id="confirmpass" class="form-control main" name="perconfirmpassword" id="myInput" required>
                     </div>
                     <!-- Password Confirmation -->
                         <!-- Submit Button -->
                     <div class="form-group col-lg-12 mx-auto mb-0" style="padding-top: 5%;">
                         <a href="#" class="btn btn-primary btn-block py-2" style="background-color:#fa4141;">
                             <!--<span class="font-weight-bold" name="save" >Create your account</span>-->
-                            <input style="color:white; background-color: #fa4141; border: 0ch;" class="button" type="submit" name="save" onclick="action()" value="Create your Account">
+                            <input style="color:white; background-color: #fa4141; border: 0ch;" class="button" type="submit" name="save" value="Create your Account">
                         </a>
                     </div>
                     </form>
