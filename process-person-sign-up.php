@@ -41,9 +41,9 @@ if(isset($_POST['save']))
 	//$query = oci_parse($conn, "INSERT INTO person_SIGNIN(person_name,person_email,person_height,person_weight,person_phonenumber,person_bloodgroup,person_dob,person_gender,person_prevhistory,person_chronicdis,person_profession,person_apartment,person_street,person_city,person_portal,person_password) values ('$name','$email','$height','$weight','$phone','$blood','$dob','$gender','$history','$chronic','$job','$apartment','$street','$city','$portal','$password')");
 	
 	if ($result) {
-				echo "Data added Successfully !";
 				//include_once 'show.php';
 				include_once 'login.php';
+				echo "<script>alert('Data added Successfully !')</script>";
 				exit();
 	}
 	else{

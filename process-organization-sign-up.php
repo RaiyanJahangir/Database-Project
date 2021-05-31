@@ -12,8 +12,8 @@ if(isset($_POST['save']))
 	$query = oci_parse($conn, "INSERT INTO organization(org_contact,org_city,org_postal,org_branch,org_street,org_name,org_pass) values ('$email','$address_city','$address_postal','$address_branch','$address_street','$nam','$pass')");
 	$result = oci_execute($query);
 	if ($result) {
-				echo "Registered successfully !";
 				include 'login.php';
+				echo "<script>alert('Registered successfully !')</script>";
 				exit();
 	}
 	else{

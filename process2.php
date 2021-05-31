@@ -17,7 +17,7 @@ if(isset($_POST['save']))
     //$res=1;
     }
     if($res==1){
-        echo "Sign in successful";
+        echo "<script>alert('Sign in successful')</script>";
         exit();
     }
     else{
