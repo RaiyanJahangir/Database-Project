@@ -16,9 +16,9 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <p>Organization Contact</p>
+                                <p>Organization Email</p>
                                 <div class="form-group">
-                                    <input type="text" name="organization-contact" placeholder="Organization Contact" required>
+                                    <input type="email" name="organization-contact" placeholder="Organization Email" required>
                                 </div>
                             </div>
                             <div class="col-md-12">

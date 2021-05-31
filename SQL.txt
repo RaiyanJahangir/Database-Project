@@ -65,7 +65,7 @@ create table event(
 
 create table organization(
  org_id      nvarchar2(64) not null, 
- org_contact  nvarchar2(64) not null,
+ org_email  nvarchar2(64) not null,
  org_city nvarchar2(64) not null,
  org_postal nvarchar2(64) not null,
  org_branch nvarchar2(64) not null,
