@@ -41,29 +41,25 @@
                 <button type="button" class="togbtn" onclick="person()" style="width: 200px; color: black">Register as a person</button>
                 <button type="button" class="togbtn" onclick="organization()" style="width: 213px;color: black">Register from an organization</button>
             </div>
-            <div id="h1" style="display: block;">
+	<div id="psign" style="display: block;">
                 <?php
                     include "person-signup.php"
                 ?>
             </div>
-            <div id="h2" style="display: none;">
+            <div id="osign" style="display: none;">
                 <?php
                     include "Organizationsignup.php"
                 ?>
             </div>
-</div>
-<!--====  End of Contact Form  ====-->
-            <?php
-    include "footer.php"
-    ?>
-     <script>
-            var x = document.getElementById("h1");
-            var y = document.getElementById("h2");
-            var z=document.getElementById("btn");
+        </div>
+    </div>
+<script>
+            var x = document.getElementById("psign");
+            var y = document.getElementById("osign");
+            var z=document.getElementById("bton");
         function organization(){
             z.style.left = "+213px"
             y.style.display="block";
-            y.style.color="white";
             x.style.display = "none";
         }
         function person() {
@@ -72,5 +68,8 @@
             y.style.display = "none";
         }
         </script>
+    <?php
+    include "footer.php"
+    ?>
 </body>
 </html>
