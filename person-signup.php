@@ -147,7 +147,7 @@
                     </form>
                     <!-- Already Registered -->
                     <div class="text-center w-100">
-                        <p class="text-muted font-weight-bold">Already Registered? <a href="#" class="text-primary ml-2" style="color: red;">Login</a></p>
+                        <p class="text-muted font-weight-bold">Already Registered? <a href="person-login.php" class="text-primary ml-2" style="color: red;">Login</a></p>
                     </div>
                     </form>
                     <!-- contact form end -->

@@ -1,200 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <title>Medic | Medical HTML Template</title>
-
-  
-  <!-- mobile responsive meta -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <!-- Slick Carousel -->
-  <link rel="stylesheet" href="plugins/slick/slick.css">
-  <link rel="stylesheet" href="plugins/slick/slick-theme.css">
-  <!-- FancyBox -->
-  <link rel="stylesheet" href="plugins/fancybox/jquery.fancybox.min.css">
-  
-  <!-- Stylesheets -->
-  <link href="css/style.css" rel="stylesheet">
-  
-  <!--Favicon-->
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-   
-
-</head>
-
-
-<body>
-  <div class="page-wrapper">
-    <!-- Preloader -->
-    <!-- <div class="preloader"></div> -->
-    <!-- Preloader -->
-
-  
-
-<!--header top-->
-<div class="header-top">
-      <div class="container clearfix">
-            <div class="top-left">
-                  <h6>Opening Hours : Saturday to Tuesday - 8am to 10pm</h6>
-            </div>
-            <div class="top-right">
-                  <ul class="social-links">
-                        <li>
-                              <a href="#">
-                                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                              </a>
-                        </li>
-                        <li>
-                              <a href="#">
-                                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                              </a>
-                        </li>
-                        <li>
-                              <a href="#">
-                                    <i class="fa fa-google-plus" aria-hidden="true"></i>
-                              </a>
-                        </li>
-                        <li>
-                              <a href="#">
-                                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                              </a>
-                        </li>
-                        <li>
-                              <a href="#">
-                                    <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                              </a>
-                        </li>
-                  </ul>
-            </div>
-      </div>
-</div>
-<!--header top-->
-
-<!--Header Upper-->
-<section class="header-uper">
-      <div class="container clearfix">
-            <div class="logo">
-                  <figure>
-                        <a href="index.html">
-                              <img src="images/logo.png" alt="" width="130">
-                        </a>
-                  </figure>
-            </div>
-            <div class="right-side">
-                  <ul class="contact-info">
-                        <li class="item">
-                              <div class="icon-box">
-                                    <i class="fa fa-envelope-o"></i>
-                              </div>
-                              <strong>Email</strong>
-                              <br>
-                              <a href="#">
-                                    <span>admin@gmail.com</span>
-                              </a>
-                        </li>
-                        <li class="item">
-                              <div class="icon-box">
-                                    <i class="fa fa-phone"></i>
-                              </div>
-                              <strong>Call Now</strong>
-                              <br>
-                              <span>0172402xxxx</span>
-                        </li>
-                  </ul>
-                  <div class="link-btn">
-                        <a href="#" class="btn-style-one">Appoinment</a>
-                  </div>
-            </div>
-      </div>
-</section>
-<!--Header Upper-->
-
-
-<!--Main Header-->
-<nav class="navbar navbar-default">
-      <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                        aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                  </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav">
-                        <li class="active">
-                              <a href="index.html">Home</a>
-                        </li>
-                        <li>
-                              <a href="about.html">Donate Blood</a>
-                        </li>
-                        <li>
-                              <a href="service.html">Donor center locations</a>
-                        </li>
-                        <li>
-                              <a href="gallery.html">Appointment</a>
-                        </li>
-                        <li>
-                              <a href="team.html">Services</a>
-                        </li>
-                        <li>
-                              <a href="appointment.html">Support us</a>
-                        </li>
-                        <li>
-                            <a href='sign in.php'>Sign in</a>
-                        </li>
-                        <li>
-                              <a href="blog.html">About us</a>
-                        </li>
-                        <li>
-                              <a href="contact.html">Contacts</a>
-                        </li>
-                        <!-- <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
-                                    <span class="caret"></span>
-                              </a>
-                              <ul class="dropdown-menu">
-                                    <li>
-                                          <a href="#">Action</a>
-                                    </li>
-                                    <li>
-                                          <a href="#">Another action</a>
-                                    </li>
-                                    <li>
-                                          <a href="#">Something else here</a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                          <a href="#">Separated link</a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                          <a href="#">One more separated link</a>
-                                    </li>
-                              </ul>
-                        </li> -->
-                  </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-</nav>
-<!--End Main Header -->
-
-<!--=================================
-=            Page Slider            =
-==================================-->
-
-
-
 
 
 
@@ -202,6 +5,7 @@
     <div class="main-body">
     
           <!-- Breadcrumb -->
+          <!--
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -210,6 +14,7 @@
             </ol>
           </nav>
           <!-- /Breadcrumb -->
+          <!--
           <form action="select.php" method="GET">
              <div class="form-group">
                 <input  type="text" name="get_id" value="<?php if(isset($_GET['get_id'])) {echo $_GET['get_id'];}?>" class="form-control" placeholder="Enter ID" required>
@@ -217,7 +22,7 @@
              <div>
                   <button style="padding-bottom:10px;" type="submit" name="search_by_id" class="btn btn-primary">SEARCH</button>
              </div>
-         </form>
+         </form>-->
 
 
 
@@ -296,12 +101,13 @@
                     <!--<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
                     <span class="text-secondary">https://bootdey.com</span>-->
                   </li>
+                  <!--
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h4 style="height:50px;">Birth Certificate Number : <?php  echo $row['PERSON_BIRTH_CERTIFICATE_NO'];?></h4>
                     <h4></h4>
                     <!--<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
                     <span class="text-secondary">https://bootdey.com</span>-->
-                  </li>
+                  <!--</li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
                     <span class="text-secondary">bootdey</span>
@@ -412,23 +218,23 @@
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>Number of Donations</h6>
                       <small>Whole Blood Corpulses</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Red Blood Corpulses</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Cryo</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Plasma</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Platelets</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                      
                     </div>
@@ -474,18 +280,18 @@
     <?php
 
 }
-if($res==1){
-  //echo "Data is presented succesfully";
-  exit();
+
+                  
+
+
+
+}
+if($res==1)
+{
+
 }
 else{
-  echo "Id not found";
-  exit();
-}
-                    
-
-
-
+  echo "wrg id";
 }
 
 }

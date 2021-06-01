@@ -124,7 +124,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
                         <li class="active">
-                              <a href="index.html">Home</a>
+                              <a href="index.php">Home</a>
                         </li>
                         <li>
                               <a href="about.html">Donate Blood</a>
@@ -146,6 +146,9 @@
                         </li>
                         <li>
                               <a href="contact.html">Contacts</a>
+                        </li>
+                        <li>
+                              <a href="admin.php">Details</a>
                         </li>
                   </ul>
             </div>
