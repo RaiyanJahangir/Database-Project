@@ -101,7 +101,9 @@ session_start();
                               <span>0172402xxxx</span>
                         </li>
                   </ul>
-                  <?php if($_SESSION['plogin'] == true ) : ?>
+                  <?php error_reporting(0); 
+                  if($_SESSION['plogin'] == true ) : ?>
+                        
                   <div class="link-btn">
                   <a href="logout.php" class="btn-style-one">Log out</a> 
                   </div>
