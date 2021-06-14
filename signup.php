@@ -32,7 +32,10 @@
 </head>
 <body>
     <?php
-    include "header.php"
+    $_SESSION['plogin'] = false;
+    include "navbar.php";
+    $_SESSION['signup']=1;
+    include "header-small.php";
     ?>
 <!-- Contact Section -->
 <img style="margin: 0px auto" src="images/Organization login/1.png" class="img-responsive" alt="Appointment">

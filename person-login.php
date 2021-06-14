@@ -31,7 +31,7 @@
                             <!-- contact form start -->
                             <h3 style="text-align:center;">Sign In</h3>
                             <br>
-                            <form action="process-person-login.php" class="row" method="post">
+                            <form action="person-login-process.php" class="row" method="post">
                                 <!-- email -->
                                 <div class="col-md-12">
                                     <input type="email" name="email" class="form-control main" placeholder="Email" required>

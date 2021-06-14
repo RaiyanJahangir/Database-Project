@@ -7,7 +7,7 @@
                     <div class="section-title">
                         <h3 style="text-align: center;">Organization <span>Sign Up</span></h3>
                     </div>
-                    <form name="contact_form" class="default-form contact-form" action="process-organization-sign-up.php" method="post">
+                    <form name="contact_form" class="default-form contact-form" action="Organizationsignup-process.php" method="post">
                         <div class="row">
                             <div class="col-md-12">
                                 <p>Organization Name</p>

@@ -4,7 +4,8 @@
 </head>
 <body>
     <?php
-    include "header.php"
+    include "navbar.php";
+    include "header.php";
     ?>
     <!--about section-->
 <section class="feature-section section bg-gray">

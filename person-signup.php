@@ -11,7 +11,7 @@
                     <br>
                     <br>
                     <!-- contact form start -->
-                    <form action="process-person-sign-up.php" class="row" method="post">
+                    <form action="person-signup-process.php" class="row" method="post">
                         <!-- name -->
                         <div class="col-md-6">
                             <label for="exampleSelect1">Name</label>

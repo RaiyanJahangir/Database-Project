@@ -4,7 +4,10 @@
 </head>
 <body>
     <?php
-    include "header.php"
+    include "navbar.php";
+    $_SESSION['login']=1;
+    $_SESSION['plogin'] = false;
+    include "header-small.php";
     ?>
 <!--==================================
         =            Contact Form            =
@@ -31,7 +34,7 @@
                             <!-- contact form start -->
                             <h3 style="text-align:center;">Sign In</h3>
                             <br>
-                            <form action="process2.php" class="row" method="post">
+                            <form action="Login-valid-check.php" class="row" method="post">
                                 <!-- email -->
                                 <div class="col-md-12">
                                     <input type="email" name="email" class="form-control main" placeholder="Email" required>
