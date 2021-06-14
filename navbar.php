@@ -109,6 +109,10 @@ session_start();
                   <div class="link-btn">
                   <a href="login.php" class="btn-style-one">Log in</a> 
                   </div>
+                  <?php elseif($_SESSION['plogin'] == "" ) : ?>
+                  <div class="link-btn">
+                  <a href="login.php" class="btn-style-one">Log in</a> 
+                  </div>
                   <?php endif; ?>
             </div>
       </div>
