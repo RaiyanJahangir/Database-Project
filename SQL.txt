@@ -68,11 +68,13 @@ end;
 
 create table donation_request
 (
-    request_id nvarchar2(64) constraint donation_request_request_id_pk primary key,
-    request_date date,
-    request_state nvarchar2(64)
+    req_id nvarchar2(64) constraint donation_request_request_id_pk primary key,
+    req_date date default null,
+    req_type nvarchar2(64),
+    req_state nvarchar2(64),
+    req_message nvarchar2(120) default null,
+    req_event nvarchar2(64) default null
 );
-
 --create donation_request
 create sequence donation_rqst_id_gen
 MINVALUE 1
@@ -114,7 +116,22 @@ create table eligibility(
      CONSTRAINT eligibility_request_id_fk FOREIGN KEY (eligibility_request_id)
      REFERENCES donation_request(request_id) on delete set null
 );
+--donation request place(insert both eligibility table and donation_req)
+create or replace procedure 
+rqst_for_donation(p_id in nvarchar2,rqst_id out nvarchar2,rqst_date out date,req_type in nvarchar2,req_message in nvarchar2,req_event in nvarchar2) as
+begin
+rqst_id:='DR_'||req_id_gen.nextval;
+rqst_date:=to_date(sysdate,'dd-mm-yyyy');
+insert into donation_request(req_id,req_date,req_type,req_message,req_event)values(rqst_id,rqst_date,req_type,req_message,'PENDING');
+insert into eligibility(eligibility_person_id,eligibility_request_id,eligibility_test_id) values(p_id,rqst_id,null);
+end;
 
+declare
+a nvarchar2(64);
+b date;
+begin
+rqst_for_donation('44',a,b,'plasma','no','none');
+end;
 
 
 create table medical_officer(
@@ -322,5 +339,3 @@ drop view mo_view;
 update donation_request
 set request_state='ACCEPTED' 
 where request_id='DR_1';
-
-

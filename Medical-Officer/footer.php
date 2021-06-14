@@ -8,7 +8,7 @@
             <div class="footer-logo">
               <figure>
                 <a href="index.html">
-                  <img src="images/logo-2.png" alt="">
+                  <img src="../images/logo-2.png" alt="">
                 </a>
               </figure>
             </div>
@@ -20,24 +20,32 @@
           <h6>Information</h6>
           <ul class="menu-link">
             <li>
-              <a href="index.php">
+              <a href="#">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>Home</a>
             </li>
             <li>
-              <a href="donate.php">
+              <a href="#">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>Donate Blood</a>
             </li>
             <li>
               <a href="#">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>Purchase Blood</a>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>Donor center locations</a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>Appointment</a>
             </li>
             <li>
               <a href="#">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>Services</a>
             </li>
             <li>
-              <a href="#">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>About Us</a>
+                <a href="#">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>Support us</a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>About us</a>
             </li>
             <li>
                 <a href="#">
@@ -122,19 +130,19 @@
   <span class="icon fa fa-angle-up"></span>
 </div>
 
-<script src="plugins/jquery.js"></script>
-<script src="plugins/bootstrap.min.js"></script>
-<script src="plugins/bootstrap-select.min.js"></script>
+<script src="../plugins/jquery.js"></script>
+<script src="../plugins/bootstrap.min.js"></script>
+<script src="../plugins/bootstrap-select.min.js"></script>
 <!-- Slick Slider -->
-<script src="plugins/slick/slick.min.js"></script>
+<script src="../plugins/slick/slick.min.js"></script>
 <!-- FancyBox -->
-<script src="plugins/fancybox/jquery.fancybox.min.js"></script>
+<script src="../plugins/fancybox/jquery.fancybox.min.js"></script>
 <!-- Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-<script src="plugins/google-map/gmap.js"></script>
+<script src="../plugins/google-map/gmap.js"></script>
 
-<script src="plugins/validate.js"></script>
-<script src="plugins/wow.js"></script>
-<script src="plugins/jquery-ui.js"></script>
-<script src="plugins/timePicker.js"></script>
-<script src="js/script.js"></script>
+<script src="../plugins/validate.js"></script>
+<script src="../plugins/wow.js"></script>
+<script src="../plugins/jquery-ui.js"></script>
+<script src="../plugins/timePicker.js"></script>
+<script src="../js/script.js"></script>

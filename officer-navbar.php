@@ -149,6 +149,9 @@ session_start();
                               <a href="team.html">Services</a>
                         </li>
                         <li>
+                              <a href="appointment.html">Support us</a>
+                        </li>
+                        <li>
                               <a href="blog.html">About us</a>
                         </li>
                         <li>
@@ -156,13 +159,7 @@ session_start();
                         </li>
                         <?php if($_SESSION['plogin'] == false ) : ?>
                         <li>
-                              <a href="admin/login.php">Admin</a>
-                        </li>
-                        <?php else : ?>
-                        <li>
-                              <a href="#"><img style="cursor: pointer;padding: 0px 0px;" class="signinicon" src="images/sign in/2.png" alt=""
-                                width="40">
-                              <?php echo $_SESSION['pemail'] ?></a>
+                              <a href="admin.php">Admin</a>
                         </li>
                         <?php endif; ?>
                   </ul>

@@ -1,7 +1,4 @@
 push command-
-
-if("warning: LF will be replaced by CRLF. shows up")
-	git config --system core.autocrlf false
 git add .
 git commit -m "msg"
 git push -u origin main

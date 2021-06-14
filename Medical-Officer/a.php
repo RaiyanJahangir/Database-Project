@@ -1,6 +1,6 @@
 <?php
-include_once 'database.php';
-if(isset($_POST['save']))
+include_once '../database.php';
+if(isset($_POST['check_btn']))
 {	 
 	$email = $_POST['email'];
 	$pass = $_POST['pass'];
@@ -67,7 +67,7 @@ if(isset($_POST['save']))
     if($res==3){
         $_SESSION['mlogin'] = true;
         $_SESSION['memail'] = $email;
-        header("Location: Medical-Officer/donation-pending-request.php");
+        header("Location: medical-officer-dashboard.php");
         echo "<script>alert('Sign in successful as a medical officer...')</script>";
         exit();
     }

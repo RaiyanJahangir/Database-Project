@@ -11,17 +11,17 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <!-- Slick Carousel -->
-  <link rel="stylesheet" href="plugins/slick/slick.css">
-  <link rel="stylesheet" href="plugins/slick/slick-theme.css">
+  <link rel="stylesheet" href="../plugins/slick/slick.css">
+  <link rel="stylesheet" href="../plugins/slick/slick-theme.css">
   <!-- FancyBox -->
-  <link rel="stylesheet" href="plugins/fancybox/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="../plugins/fancybox/jquery.fancybox.min.css">
   
   <!-- Stylesheets -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
   
   <!--Favicon-->
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 
 </head>
 <div class="page-wrapper">
@@ -76,7 +76,7 @@ session_start();
             <div class="logo">
                   <figure>
                         <a href="index.html">
-                              <img src="images/logo.png" alt="" width="130">
+                              <img src="../images/logo.png" alt="" width="130">
                         </a>
                   </figure>
             </div>
@@ -101,19 +101,9 @@ session_start();
                               <span>0172402xxxx</span>
                         </li>
                   </ul>
-                  <?php if($_SESSION['plogin'] == true ) : ?>
-                  <div class="link-btn">
-                  <a href="logout.php" class="btn-style-one">Log out</a> 
+	<div class="link-btn">
+                  <a href="../logout.php" class="btn-style-one">Log out</a> 
                   </div>
-                  <?php elseif($_SESSION['plogin'] == false ) : ?>
-                  <div class="link-btn">
-                  <a href="login.php" class="btn-style-one">Log in</a> 
-                  </div>
-                  <?php elseif($_SESSION['plogin'] == "" ) : ?>
-                  <div class="link-btn">
-                  <a href="login.php" class="btn-style-one">Log in</a> 
-                  </div>
-                  <?php endif; ?>
             </div>
       </div>
 </section>
@@ -136,35 +126,18 @@ session_start();
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                        <li class="active">
-                              <a href="index.php">Home</a>
+                        <li>
+                              <a href="donate.php">Donation Request</a>
                         </li>
                         <li>
-                              <a href="donate.php">Donate Blood</a>
+                              <a href="service.html">Purschase Request</a>
                         </li>
                         <li>
-                              <a href="service.html">Purschase Blood</a>
+                              <a href="team.html">Eligible Candidate List</a>
                         </li>
                         <li>
-                              <a href="team.html">Services</a>
+                              <a href="appointment.html">Person List</a>
                         </li>
-                        <li>
-                              <a href="blog.html">About us</a>
-                        </li>
-                        <li>
-                              <a href="contact.html">Contacts</a>
-                        </li>
-                        <?php if($_SESSION['plogin'] == false ) : ?>
-                        <li>
-                              <a href="admin/login.php">Admin</a>
-                        </li>
-                        <?php else : ?>
-                        <li>
-                              <a href="#"><img style="cursor: pointer;padding: 0px 0px;" class="signinicon" src="images/sign in/2.png" alt=""
-                                width="40">
-                              <?php echo $_SESSION['pemail'] ?></a>
-                        </li>
-                        <?php endif; ?>
                   </ul>
             </div>
             <!-- /.navbar-collapse -->

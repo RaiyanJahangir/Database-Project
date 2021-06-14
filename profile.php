@@ -49,9 +49,9 @@ include "header-small.php";
                   <div class="bio-row">
                       <p><span>Birthday</span>: <?php echo $_SESSION['pdob']; ?></p>
                   </div>
-                  <div class="bio-row">
+                  <!--<div class="bio-row">
                       <p><span>Age </span>: <?php //echo $_SESSION['page']; ?></p>
-                  </div>
+                  </div>-->
                   <div class="bio-row">
                       <p><span>Occupation </span>: <?php echo $_SESSION['pocc']; ?></p>
                   </div>
