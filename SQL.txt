@@ -83,11 +83,11 @@ INCREMENT BY 1;
 
 --When someone requested for donation (both donation_rqst and eligibility will be inserted)
 create or replace procedure 
-rqst_for_donation (p_id in nvarchar2,rqst_id out nvarchar2,rqst_date out date) as
+rqst_for_donation(p_id in nvarchar2,rqst_id out nvarchar2,rqst_date out date,req_type in nvarchar2,req_message in nvarchar2,req_event in nvarchar2) as
 begin
-rqst_id:='DR_'||donation_rqst_id_gen.nextval;
+rqst_id:='DR_'||req_id_gen.nextval;
 rqst_date:=to_date(sysdate,'dd-mm-yyyy');
-insert into donation_request(request_id,request_date,request_state)values(rqst_id,rqst_date,'PENDING');
+insert into donation_request(req_id,req_date,req_type,req_message,req_event)values(rqst_id,rqst_date,req_type,req_message,'PENDING');
 insert into eligibility(eligibility_person_id,eligibility_request_id,eligibility_test_id) values(p_id,rqst_id,null);
 end;
 
