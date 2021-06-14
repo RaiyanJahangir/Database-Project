@@ -114,7 +114,7 @@ create table eligibility(
      REFERENCES eligibility_test( test_id) on delete set null,
      
      CONSTRAINT eligibility_request_id_fk FOREIGN KEY (eligibility_request_id)
-     REFERENCES donation_request(request_id) on delete set null
+     REFERENCES donation_request(req_id) on delete set null
 );
 --donation request place(insert both eligibility table and donation_req)
 create or replace procedure 
