@@ -124,4 +124,100 @@ if(isset($_POST['logout_btn']))
 }
 
 
+//Inserting new medical officer
+if(isset($_POST['register_mo_btn']))
+{
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $cpassword = $_POST['confirmpassword'];
+
+    $email_query = oci_parse($connection,"SELECT * FROM medical_officer WHERE email='$email' ");
+    $email_query_run = oci_execute($email_query);
+    if(($row = oci_fetch_array($email_query, OCI_BOTH)) != false)
+    {
+        $_SESSION['status'] = "Email Already Taken. Please Try Another one.";
+        $_SESSION['status_code'] = "error";
+        header('Location: CreateMedicalOfficer.php');  
+    }
+    else
+    {
+        if($password === $cpassword && $username!="" && $email!="")
+        {
+            $query=oci_parse($connection,"declare
+            a nvarchar2(50);
+            b date;
+            c date;
+            begin
+            create_medical_officer(a,'$username',b,c,'$email','$password');
+            end;");
+            $query_run=oci_execute($query);
+            
+            if($query_run)
+            {
+                // echo "Saved";
+                $_SESSION['status'] = "Medical Officer Profile Added";
+                $_SESSION['status_code'] = "success";
+                header('Location: CreateMedicalOfficer.php');
+            }
+            else 
+            {
+                $_SESSION['status'] = "Medical Officer Profile Not Added";
+                $_SESSION['status_code'] = "error";
+                header('Location: CreateMedicalOfficer.php');  
+            }
+        }
+        else 
+        {
+            $_SESSION['status'] = "Password and Confirm Password Does Not Match";
+            $_SESSION['status_code'] = "warning";
+            header('Location: CreateMedicalOfficer.php');  
+        }
+    }
+
+}
+
+//Deleting medical officer
+if(isset($_POST['delete_mo_btn']))
+{
+    $id=$_POST['delete_id'];
+    $query = oci_parse($connection,"Delete  from medical_officer where medical_officer_id='$id'");
+    $query_run = oci_execute($query);
+    if($query_run)
+    {
+        $_SESSION['success']='Your Data is Deleted';
+        header('location: CreateMedicalOfficer.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Deleted';
+        header('location: CreateMedicalOfficer.php');
+    }
+}
+
+//Updating Medical Officer
+if(isset($_POST['update_mo_btn']))
+{
+    $id=$_POST['edit_id'];
+    $username=$_POST['edit_username'];
+    $email=$_POST['edit_email'];
+    $password=$_POST['edit_password'];
+    $contracttime=$_POST['edit_contracttime'];
+
+    $query = oci_parse($connection,"Update medical_officer set medical_officer_name='$username',medical_officer_email='$email',medical_officer_password='$password',medical_officer_contracttime='$contracttime'where medical_officer_id='$id'");
+    $query_run = oci_execute($query);
+
+    if($query_run)
+    {
+        $_SESSION['success']='Your Data is Updated';
+        header('location:CreateMedicalOfficer.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Updated';
+        header('location:CreateMedicalOfficer.php');
+    }
+}
+
+
 ?>
