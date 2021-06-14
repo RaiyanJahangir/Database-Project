@@ -313,3 +313,14 @@ create table blood_bank(
 );
 
 
+create view  mo_view as
+select e.eligibility_person_id, e.eligibility_request_id,e.eligibility_test_id, d.request_state from donation_request d ,eligibility e 
+where e.eligibility_request_id=d.request_id;
+
+select * from mo_view;
+drop view mo_view;
+update donation_request
+set request_state='ACCEPTED' 
+where request_id='DR_1';
+
+
