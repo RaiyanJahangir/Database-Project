@@ -53,8 +53,18 @@ include('includes/navbar.php');
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Registered Medical Officers</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+              <?php
+                  require 'dbconfig.php';
+                  
+                  $query = oci_parse($connection,"Select medical_officer_id from medical_officer order by medical_officer_id");
+                  $query_run = oci_execute($query);
+                  $numrows=oci_fetch_all($query,$res);
+                  echo '<h4> Total Medical Officers:'.$numrows.'</h4>';
+                  
+                ?>
+              </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>

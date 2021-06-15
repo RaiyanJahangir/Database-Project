@@ -109,8 +109,6 @@ $query_run=oci_execute($query);
             <th>Postal</th>
             <th>Total Purchases </th>
             <th>Birth Certificate No. </th>
-            <th>Edit</th>
-            <th>Delete</th>
           </tr>
         </thead>
         <tbody>

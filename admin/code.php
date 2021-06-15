@@ -219,5 +219,23 @@ if(isset($_POST['update_mo_btn']))
     }
 }
 
+//Person deletion
+if(isset($_POST['delete_p_btn']))
+{
+    $id=$_POST['delete_id'];
+    $query = oci_parse($connection,"Delete  from person where person_id='$id'");
+    $query_run = oci_execute($query);
+    if($query_run)
+    {
+        $_SESSION['success']='Your Data is Deleted';
+        header('location: Person.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Deleted';
+        header('location: Person.php');
+    }
+}
+
 
 ?>

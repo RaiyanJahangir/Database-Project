@@ -41,7 +41,7 @@ include('includes/header.php');
             
                     <button type="submit" name="login_btn" class="btn btn-primary btn-user btn-block"> Login </button>
                     <hr>
-                    <button type="submit" name="go_back_btn" class="btn btn-primary btn-user btn-block"> GO BACK </button>
+                    <button type="submit" name="go_back_btn" class="btn btn-primary btn-user btn-block"> Go to Home Page </button>
                     <hr>
                 </form>
                 

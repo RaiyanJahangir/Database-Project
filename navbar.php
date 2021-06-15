@@ -145,7 +145,7 @@ session_start();
                               <a href="donate.php">Donate Blood</a>
                         </li>
                         <li>
-                              <a href="service.html">Purschase Blood</a>
+                              <a href="service.html">Purchase Blood</a>
                         </li>
                         <li>
                               <a href="team.html">Services</a>

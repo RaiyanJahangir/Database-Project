@@ -69,8 +69,8 @@
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Other Tables:</h6>
       <a class="collapse-item" href="CreateMedicalOfficer.php">Medical Officers</a>
-      <a class="collapse-item" href="utilities-border.html">Borders</a>
-      <a class="collapse-item" href="utilities-animation.html">Animations</a>
+      <a class="collapse-item" href="Person.php">Users</a>
+      <a class="collapse-item" href="donation_rqst.php">Donation Requests</a>
       <a class="collapse-item" href="utilities-other.html">Other</a>
     </div>
   </div>
