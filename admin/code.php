@@ -237,5 +237,40 @@ if(isset($_POST['delete_p_btn']))
     }
 }
 
+if(isset($_POST['update_p_btn']))
+{
+    $id=$_POST['edit_id'];
+    $username=$_POST['edit_username'];
+    $email=$_POST['edit_email'];
+    $password=$_POST['edit_password'];
+    $phonenumber=$_POST['edit_phonenumber'];
+    $profession=$_POST['edit_profession'];
+    $dob=$_POST['edit_dob'];
+    $height=$_POST['edit_height'];
+    $weight=$_POST['edit_weight'];
+    $age=$_POST['edit_age'];
+    $apartment=$_POST['edit_apartment'];
+    $street=$_POST['edit_street'];
+    $city=$_POST['edit_city'];
+    $portal=$_POST['edit_portal'];
+    $birth=$_POST['edit_birth'];
+
+    $query = oci_parse($connection,"Update person set person_name='$username',person_email='$email',person_password='$password',person_phonenumber='$phonenumber',
+    person_profession='$profession',person_dob='$dob',person_height='$height',person_weight='$weight',person_age='$age',person_apartment='$apartment',person_street='$street',
+    person_city='$city',person_portal='$portal',person_birth_certificate_no='$birth'
+    where person_id='$id'");
+    $query_run = oci_execute($query);
+
+    if($query_run)
+    {
+        $_SESSION['success']='Your Data is Updated';
+        header('location:Person.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Updated';
+        header('location:Person.php');
+    }
+}
 
 ?>

@@ -53,9 +53,9 @@ include('includes/navbar.php');
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">User Profile 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
               Add User Profile 
-            </button>
+            </button>-->
     </h6>
   </div>
 
@@ -167,7 +167,7 @@ $query_run=oci_execute($query);
 
             <td><?php  echo $row['PERSON_PORTAL']; ?></td>
 
-            <td><?php  echo $row['PERSON_NO_OF_DONATION']; ?></td>
+            <td><?php  echo $row['PERSON_NO_OF_PURCHASE']; ?></td>
 
             <td><?php  echo $row['PERSON_BIRTH_CERTIFICATE_NO']; ?></td>
 
@@ -177,7 +177,7 @@ $query_run=oci_execute($query);
 
                     <input type="hidden" name="edit_id" value="<?php echo $row['PERSON_ID']; ?>">
 
-                    <button  type="submit" name="edit_mo_btn" class="btn btn-success"> EDIT</button>
+                    <button  type="submit" name="edit_p_btn" class="btn btn-success"> EDIT</button>
 
                 </form>
 
