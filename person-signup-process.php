@@ -19,6 +19,11 @@ if(isset($_POST['save']))
     $city= $_POST['percity'];
 	$postal= $_POST['perportal'];
     $password= $_POST['perpassword'];
+	$cpassword=$_POST['perconfirmpassword'];
+
+	if($password===$cpassword){
+
+	
 
 	$query = oci_parse($conn,"declare
 a nvarchar2(50);
@@ -35,7 +40,15 @@ end;");
 	}
 	else{
 		echo "Error !";
+		include_once 'signup.php';
 			exit();
 	}
+}
+else
+{
+	echo "Password And Confirm password doesn't match.";
+	include_once 'signup.php';
+	exit();
+}
 }
 ?>

@@ -229,6 +229,50 @@ include('includes/navbar.php');
 }
 ?>
 
+<?php
+  if(isset($_POST['edit_event_btn']))
+{
+    $id=$_POST['edit_id'];
+    $query=oci_parse($connection,"Select * from event where event_id='$id' ");
+    $query_run=oci_execute($query);
+    while(($row = oci_fetch_array($query, OCI_BOTH)) != false)
+
+            {
+        ?>
+    
+
+
+
+
+  <div class="modal-body">
+
+          <form action="code.php" method="POST">
+            <input type="hidden" name="edit_id" value="<?php echo $row['EVENT_ID']?>">
+            <div class="form-group">
+                <label> Event Name </label>
+                <input type="text" name="edit_name" value="<?php echo $row['EVENT_NAME'] ?>" class="form-control" placeholder="Enter Event Name">
+            </div>
+            <div class="form-group">
+                <label>Event Location</label>
+                <input type="text" name="edit_location" value="<?php echo $row['EVENT_LOCATION'] ?>"  class="form-control" placeholder="Enter Event Location">
+            </div>
+            <div class="form-group">
+                <label>Event Start Date</label>
+                <input type="text" name="edit_starttime" value="<?php echo $row['EVENT_STARTDATE'] ?>"  class="form-control" placeholder="Enter Start Date">
+            </div>
+            <div class="form-group">
+                <label>Event End Date</label>
+                <input type="text" name="edit_endtime" value="<?php echo $row['EVENT_ENDDATE'] ?>"  class="form-control" placeholder="Enter End Date">
+            </div>
+
+            <a href="events.php" class="btn btn-danger">CANCEL</a>
+            <button type="submit" name="update_event_btn" class="btn btn-primary"> Update </button>
+          </form>  
+        <?php
+        }
+}
+?>
+
   </div>
 
   </div>

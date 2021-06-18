@@ -120,7 +120,7 @@ if(isset($_POST['logout_btn']))
 {
     session_destroy();
     unset($_SESSION['username']);
-    header('Location:login.php');
+    header('Location:../login.php');
 }
 
 
@@ -270,6 +270,100 @@ if(isset($_POST['update_p_btn']))
     {
         $_SESSION['status']='Your Data is Not Updated';
         header('location:Person.php');
+    }
+}
+
+//Creating a new event
+if(isset($_POST['register_event_btn']))
+{
+    $name = $_POST['name'];
+    $location = $_POST['location'];
+    $startdate = $_POST['startdate'];
+    $enddate = $_POST['enddate'];
+
+    $query = oci_parse($connection,"SELECT * FROM event WHERE event_name='$name' ");
+    $query_run = oci_execute($query);
+    if(($row = oci_fetch_array($query, OCI_BOTH)) != false)
+    {
+        $_SESSION['status'] = "Name Already Taken. Please Try Another one.";
+        $_SESSION['status_code'] = "error";
+        header('Location: Event.php');  
+    }
+    else
+    {
+        if( $name!="" && $location!="" && $startdate!="" && $enddate!="")
+        {
+            $query=oci_parse($connection,"declare
+            a nvarchar2(50);
+            begin
+            create_event(a,upper('$name'),upper('$location'),to_date('$startdate','yyyy-mm-dd'),to_date('$enddate','yyyy-mm-dd'));
+            end;");
+            $query_run=oci_execute($query);
+            
+            if($query_run)
+            {
+                // echo "Saved";
+                $_SESSION['status'] = "New Event Added";
+                $_SESSION['status_code'] = "success";
+                header('Location: events.php');
+            }
+            else 
+            {
+                $_SESSION['status'] = "Event Not Added";
+                $_SESSION['status_code'] = "error";
+                header('Location: events.php');  
+            }
+        }
+        else 
+        {
+            $_SESSION['status'] = "Please fill up the all the information";
+            $_SESSION['status_code'] = "warning";
+            header('Location: events.php');  
+        }
+    }
+
+}
+
+//Delete event
+if(isset($_POST['delete_event_btn']))
+{
+    $id=$_POST['delete_id'];
+    $query = oci_parse($connection,"Delete  from event where event_id='$id'");
+    $query_run = oci_execute($query);
+    if($query_run)
+    {
+        $_SESSION['success']='Your Data is Deleted';
+        header('location: events.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Deleted';
+        header('location: events.php');
+    }
+}
+
+//Updating Event
+if(isset($_POST['update_event_btn']))
+{
+    $id=$_POST['edit_id'];
+    $name=$_POST['edit_name'];
+    $location=$_POST['edit_location'];
+    $starttime=$_POST['edit_starttime'];
+    $endtime=$_POST['edit_endtime'];
+
+    $query = oci_parse($connection,"Update event set event_name='$name',event_location='$location',event_startdate=to_date('$starttime','dd-mon-yyyy'),event_enddate=to_date('$endtime','dd-mon-yyyy')
+    where event_id='$id'");
+    $query_run = oci_execute($query);
+
+    if($query_run)
+    {
+        $_SESSION['success']='Your Data is Updated';
+        header('location:events.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Updated';
+        header('location:events.php');
     }
 }
 

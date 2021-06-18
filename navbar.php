@@ -102,7 +102,7 @@ session_start();
                         </li>
                   </ul>
                   <?php error_reporting(0); 
-                  if($_SESSION['plogin'] == true ) : ?>
+                  if($_SESSION['plogin'] == true || $_SESSION['ologin']==true) : ?>
                         
                   <div class="link-btn">
                   <a href="logout.php" class="btn-style-one">Log out</a> 
@@ -141,9 +141,11 @@ session_start();
                         <li class="active">
                               <a href="index.php">Home</a>
                         </li>
+                        <?php if($_SESSION['ologin']==false) :?>
                         <li>
                               <a href="donate.php">Donate Blood</a>
                         </li>
+                        <?php endif;?>
                         <li>
                               <a href="service.html">Purchase Blood</a>
                         </li>
@@ -156,15 +158,26 @@ session_start();
                         <li>
                               <a href="contact.html">Contacts</a>
                         </li>
-                        <?php if($_SESSION['plogin'] == false ) : ?>
+                        <?php if($_SESSION['plogin'] == false) : ?>
                         <li>
-                              <a href="admin/login.php">Admin</a>
+                             <!-- <a href="admin/login.php">Admin</a>-->
                         </li>
                         <?php else : ?>
                         <li>
                               <a href="#"><img style="cursor: pointer;padding: 0px 0px;" class="signinicon" src="images/sign in/2.png" alt=""
                                 width="40">
                               <?php echo $_SESSION['pemail'] ?></a>
+                        </li>
+                        <?php endif; ?>
+                        <?php if($_SESSION['ologin'] == false) : ?>
+                        <li>
+                             <!-- <a href="admin/login.php">Admin</a>-->
+                        </li>
+                        <?php else : ?>
+                        <li>
+                              <a href="#"><img style="cursor: pointer;padding: 0px 0px;" class="signinicon" src="images/sign in/2.png" alt=""
+                                width="40">
+                              <?php echo $_SESSION['oemail'] ?></a>
                         </li>
                         <?php endif; ?>
                   </ul>

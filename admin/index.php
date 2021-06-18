@@ -80,10 +80,20 @@ include('includes/navbar.php');
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Registered Users:</div>
               <div class="row no-gutters align-items-center">
                 <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                  <?php
+                  require 'dbconfig.php';
+                  
+                  $query = oci_parse($connection,"Select person_id from person order by person_id");
+                  $query_run = oci_execute($query);
+                  $numrows=oci_fetch_all($query,$res);
+                  echo '<h4> Total Users:'.$numrows.'</h4>';
+                  
+                ?>
+                  </div>
                 </div>
                 <div class="col">
                   <div class="progress progress-sm mr-2">
@@ -107,8 +117,18 @@ include('includes/navbar.php');
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Ongoing Events:</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+              <?php
+                  require 'dbconfig.php';
+                  
+                  $query = oci_parse($connection,"Select * from event where sysdate<event_enddate");
+                  $query_run = oci_execute($query);
+                  $numrows=oci_fetch_all($query,$res);
+                  echo '<h4> '.$numrows.'</h4>';
+                  
+                ?>
+              </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-comments fa-2x text-gray-300"></i>

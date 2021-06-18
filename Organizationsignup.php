@@ -53,7 +53,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <p>Confirm Password</p>
-                                    <input type="password" id="myInput" required>
+                                    <input type="password" id="myInput" name="cpass" required>
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">

@@ -19,7 +19,14 @@ if(isset($_POST['save']))
         $_SESSION['ologin'] = true;
         $_SESSION['oid'] = $id;
         $_SESSION['oemail'] = $email;
-        header("Location: profile.php");
+        $_SESSION['opass'] = $password;
+        $_SESSION['oname'] = $row['ORG_NAME'];
+        $_SESSION['ocity'] = $row['ORG_CITY'];
+        $_SESSION['opostal'] = $row['ORG_POSTAL'];
+        $_SESSION['obranch'] = $row['ORG_BRANCH'];
+        $_SESSION['ostreet'] = $row['ORG_STREET'];
+        $_SESSION['opurchase'] = $row['ORG_NO_OF_PURCHASE'];
+        header("Location: organization_profile.php");
         echo "<script>alert('Sign in successful as an organization')</script>";
         exit();
     }
@@ -69,6 +76,24 @@ if(isset($_POST['save']))
         $_SESSION['memail'] = $email;
         header("Location: Medical-Officer/donation-pending-request.php");
         echo "<script>alert('Sign in successful as a medical officer...')</script>";
+        exit();
+    }
+    $stid = oci_parse($conn, 'SELECT * FROM admin');
+    oci_execute($stid);
+    while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+        //echo $row[''];
+    if($row['EMAIL']==$email && $row['PASSWORD']==$pass){
+        $res=4;
+        session_start();
+        $_SESSION['id']=$row['ID'];
+        break;
+    }
+    }
+   if($res==4){
+        //$_SESSION['mlogin'] = true;
+        $_SESSION['username'] = $email;
+        header("Location: admin/index.php");
+        echo "<script>alert('Sign in successful as admin...')</script>";
         exit();
     }
     else{

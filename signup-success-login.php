@@ -14,11 +14,13 @@ if(isset($_POST['save']))
 	$result = oci_execute($query);
 	if ($result) {
 				echo "Registered successfully !";
-				include 'login.php';
+				//include 'login.php';
+				header("Location: login.php");
 				exit();
 	}
 	else{
 		echo "Error !";
+		header("Location: login.php");
 				exit();
 	}
 }

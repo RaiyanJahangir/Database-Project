@@ -24,11 +24,11 @@ $_SESSION['donate']=1;
                                         <p>Type of donation</p>
                                         <div class="form-group">
                                             <select name="type">
-                                                <option>Whole blood</option>
-                                                <option>Plasma</option>
+                                                <option>WHOLE BLOOD</option>
+                                                <option>PLASMA</option>
                                                 <option>RBC</option>
-                                                <option>Platelets</option>
-                                                <option>Cryo</option>
+                                                <option>PLATELETS</option>
+                                                <option>CRYO</option>
                                                 <option>WBC</option>
                                             </select>
                                         </div>
@@ -37,13 +37,20 @@ $_SESSION['donate']=1;
                                         <p>Event</p>
                                         <div class="form-group">
                                             <select name="event">
-                                                <option>None</option>  
-                                                <option>DU blood camp</option>
-                                                <option>MIST blood camp</option>
-                                                <option>Let's donate Loves</option>
-                                                <option>Distribute Happiness</option>
-                                                <option>Donate Blood, Save Lives</option>
-                                                <option>Bup Red Love Event</option>
+                                            <option>None</option> 
+                                           <?php 
+                                           include 'database.php';
+                                                $query=oci_parse($conn,"select event_name from event where sysdate<event_enddate ");
+                                                $query_run=oci_execute($query);
+                                                while(($row = oci_fetch_array($query, OCI_BOTH)) != false)
+
+                                                {
+                                                    echo $row['EVENT_NAME'];
+                                            ?>
+                                                <option><?php echo $row['EVENT_NAME']?></option>
+                                                <?php
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
