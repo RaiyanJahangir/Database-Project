@@ -1,5 +1,6 @@
 <?php
 include_once 'database.php';
+include "session.php";
 if(isset($_POST['save']))
 {	 
 	$email = $_POST['email'];
@@ -15,7 +16,7 @@ if(isset($_POST['save']))
     }
     }
     if($res==1){
-        session_start();
+        //session_start();
         $_SESSION['ologin'] = true;
         $_SESSION['oid'] = $id;
         $_SESSION['oemail'] = $email;
@@ -35,7 +36,7 @@ if(isset($_POST['save']))
     while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
     if($row['PERSON_EMAIL']==$email && $row['PERSON_PASSWORD']==$pass){
         $res=2;
-        session_start();
+        //session_start();
         $_SESSION['pid']=$row['PERSON_ID'];
         $_SESSION['pname']=$row['PERSON_NAME'];
         $_SESSION['pnum']=$row['PERSON_PHONENUMBER'];
@@ -48,6 +49,14 @@ if(isset($_POST['save']))
         $_SESSION['phis']=$row['PERSON_PREVHISTORY'];
         $_SESSION['pchron']=$row['PERSON_CHRONICDIS'];
         $_SESSION['pbnum']=$row['PERSON_BIRTH_CERTIFICATE_NO'];
+        $_SESSION['pdon']=$row['PERSON_NO_OF_DONATION'];
+        $_SESSION['papart']=$row['PERSON_APARTMENT'];
+        $_SESSION['pstreet']=$row['PERSON_STREET'];
+        $_SESSION['pcity']=$row['PERSON_CITY'];
+        $_SESSION['ppostal']=$row['PERSON_PORTAL'];
+        $_SESSION['ppur']=$row['PERSON_NO_OF_PURCHASE'];
+        $_SESSION['ppass']=$row['PERSON_PASSWORD'];
+        $_SESSION['age']=$row['PERSON_AGE'];
         break;
     }
     }
@@ -66,7 +75,7 @@ if(isset($_POST['save']))
         echo $row['MEDICAL_OFFICER_EMAIL'];
     if($row['MEDICAL_OFFICER_EMAIL']==$email && $row['MEDICAL_OFFICER_PASSWORD']==$pass){
         $res=3;
-        session_start();
+        //session_start();
         $_SESSION['mid']=$row['MEDICAL_OFFICER_ID'];
         break;
     }
@@ -84,7 +93,7 @@ if(isset($_POST['save']))
         //echo $row[''];
     if($row['EMAIL']==$email && $row['PASSWORD']==$pass){
         $res=4;
-        session_start();
+        //session_start();
         $_SESSION['id']=$row['ID'];
         break;
     }
@@ -99,6 +108,7 @@ if(isset($_POST['save']))
     else{
         //header("Location: login.php");
         echo "<script>alert('Wrong username or email')</script>";
+        header("Location: login.php");
         exit();
     }
 }

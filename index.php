@@ -6,6 +6,7 @@
     <?php
     include "navbar.php";
     include "header.php";
+    include "database.php";
     ?>
     <!--about section-->
 <section class="feature-section section bg-gray">
@@ -340,6 +341,53 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+<!--End Service Section-->
+<?php
+$query=oci_parse($conn,"select * from event where sysdate<event_enddate ");
+$query_run=oci_execute($query);
+?>
+
+<!--Service Section-->
+<section class="service-section bg-gray section">
+    <div class="container">
+    
+        <div class="section-title text-center">
+            <h3>
+                <span>ONGOING EVENTS</span>
+                
+            </h3>
+            <p>HURRY UP TO YOUR PREFERRED PLACE AND PARTICIPATE IN HONORIFIC ACT </p>
+        </div>
+        <div class="row items-container clearfix">
+        <?php 
+            while(($row = oci_fetch_array($query, OCI_BOTH)) != false)
+
+            {
+
+        ?>
+       
+            <div class="item">
+                <div class="inner-box">
+                    <div class="img_holder">
+                        <!--<a href="service.html">-->
+                            <img src="images/gallery/4.jpg" alt="images" class="img-responsive">
+                        <!--</a>-->
+                    </div>
+                    <div class="image-content text-center">
+                        <span><?php echo $row['EVENT_NAME'];?></span>
+                        <!--<a href="service.html">-->
+                            <h6><?php echo $row['EVENT_LOCATION'];?></h6>
+                        <!--</a>-->
+                        <p>Started on <?php echo $row['EVENT_STARTDATE']; ?><br> End on <?php echo $row['EVENT_ENDDATE']; ?></p>
+                    </div>
+                </div>
+            </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </section>

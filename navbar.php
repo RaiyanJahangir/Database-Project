@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "session.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,9 +75,9 @@ session_start();
       <div class="container clearfix">
             <div class="logo">
                   <figure>
-                        <a href="index.html">
+                       
                               <img src="images/logo.png" alt="" width="130">
-                        </a>
+                        
                   </figure>
             </div>
             <div class="right-side">
@@ -150,7 +150,10 @@ session_start();
                               <a href="service.html">Purchase Blood</a>
                         </li>
                         <li>
-                              <a href="team.html">Services</a>
+                              <a href="blood_list.php">Check Available Blood</a>
+                        </li>
+                        <li>
+                              <a href="#">Services</a>
                         </li>
                         <li>
                               <a href="blog.html">About us</a>
@@ -164,7 +167,7 @@ session_start();
                         </li>
                         <?php else : ?>
                         <li>
-                              <a href="#"><img style="cursor: pointer;padding: 0px 0px;" class="signinicon" src="images/sign in/2.png" alt=""
+                              <a href="profile.php"><img style="cursor: pointer;padding: 0px 0px;" class="signinicon" src="images/sign in/2.png" alt=""
                                 width="40">
                               <?php echo $_SESSION['pemail'] ?></a>
                         </li>
@@ -175,7 +178,7 @@ session_start();
                         </li>
                         <?php else : ?>
                         <li>
-                              <a href="#"><img style="cursor: pointer;padding: 0px 0px;" class="signinicon" src="images/sign in/2.png" alt=""
+                              <a href="organization_profile.php"><img style="cursor: pointer;padding: 0px 0px;" class="signinicon" src="images/sign in/2.png" alt=""
                                 width="40">
                               <?php echo $_SESSION['oemail'] ?></a>
                         </li>
