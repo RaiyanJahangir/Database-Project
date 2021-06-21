@@ -40,8 +40,10 @@
                                     <input type="email" name="email" class="form-control main" placeholder="Email" required>
                                 </div >
                                 <div class="col-md-12">
-                                    <input type="password" name="pass" class="form-control main" id="myInput">
-                                    <input type="checkbox" onclick="myFunction()"> show pass
+                                    <input class="form-control main" type="password" name="pass"  id="myInput">
+                                    <span class="eye" onclick="myFunction()">
+                                    <i style="display:none;" id="hidel" class="fa fa-eye"></i>
+                                    <i id="hide2" class="fa fa-eye-slash"></i></span> show pass
                                 </div>
                                 <!-- submit button -->
                                 <div class="col-md-12 text-right">
@@ -62,5 +64,22 @@
             <?php
     include "footer.php"
     ?>
+        <script>
+    function myFunction(){
+    var x = document.getElementById("myInput") ;
+    var y = document.getElementById("hide1") ;
+    var z = document.getElementById("hide2") ;
+    if (x.type === 'password') {
+    x.type = "text";
+    y.style.display = "block";
+    z.style.display = "none";
+    }
+    else{
+    x.type = "password";
+    y.style.display = "none";
+    z.style.display = "block";
+    }
+    }
+</script>
 </body>
 </html>

@@ -12,6 +12,7 @@
     include_once '../database.php';
     include "navbar.php";
     include "header-small.php";
+    echo $mid=$_SESSION['mid'];
     ?>
     <br>
     <br>
@@ -27,21 +28,31 @@
                     <th>Donation ID</th>
                     <th>Name</th>
                     <th>Blood Group</th>
+                    <th>Event</th>
                     <th>Donation Type</th>
+                    <th>Last date of Donation<br>(To check valid for the specified req)</th>
                     <th>Message(If any)</th>
                     <th>Details</th>
-                    <th>Eligibility</th>
-                    <th>Update</th>
+                    <th>Invitation</th>
+                    <th>Test Result</th>
+                    <th>Donated Blood</th>
+                    <th>Did Not Donated Blood</th>
                 </tr>
             </thead>
             <tbody>
                     <?php
+                    error_reporting(0);
                     $stid = oci_parse($conn, 'SELECT * FROM donation_request');
                     oci_execute($stid);
                     while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                    $invitation=$row['REQ_STATE'];
+                    if($invitation==='DECLINE' || $invitation==='NOT PASSED' || $invitation==='CANCELED' 
+                    || $invitation == "DONATED" || $invitation=="NOT DONATED")continue;
                     $type=$row['REQ_TYPE'];
                     $id=$row['REQ_ID'];
                     $msg=$row['REQ_MESSAGE'];
+                    if($row['REQ_EVENT']===null)$event="empty";
+                    else $event=$row['REQ_EVENT'];
                     $query = oci_parse($conn, "SELECT p.person_name,p.person_bloodgroup,p.person_id FROM person p,eligibility e,donation_request d
                                         where p.person_id=e.eligibility_person_id and e.eligibility_request_id = '$id'");
                     oci_execute($query);

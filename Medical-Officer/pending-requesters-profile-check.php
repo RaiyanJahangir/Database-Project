@@ -15,7 +15,12 @@
     <?php
     if(isset($_POST['check_btn']))
     {
-    $id=$_POST['check_id'];
+    $did=$_POST['check_id'];
+    $query = oci_parse($conn, "SELECT p.person_id FROM person p,eligibility e,donation_request d
+                    where p.person_id=e.eligibility_person_id and e.eligibility_request_id = '$did'");
+    oci_execute($query);
+    $row = oci_fetch_array($query, OCI_BOTH);
+    $id=$row[0];
     $query=oci_parse($conn,"SELECT * FROM person where person_id='$id' ");
     $query_run=oci_execute($query);
     $row = oci_fetch_array($query, OCI_BOTH);
@@ -138,35 +143,38 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Last Date of Donation</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <?php echo $row[1] ?>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
                       <h6 class="mb-0">No of Donation</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <?php echo $row[1] ?>
+		                <?php
+		                    $query = oci_parse($conn, "select * from blood_bank where blood_bank_donor_ID='$id'");
+    		                oci_execute($query);
+    		                $row = oci_fetch_all($query,$res);
+		                ?>
+                      <?php echo $row?>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Send inviation for blood donation test</a>
+                      <form action="check.php" method="post">
+                      <input type="hidden" name="approve_id" value="<?php echo $did; ?>">
+                      <button type="submit" name="app" class="btn btn-info" >Send inviation for blood donation test</button>
+                      </form>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-sm-12">
+                      <form action="check.php" method="post">
+                      <input type="hidden" name="decline_id" value="<?php echo $did; ?>">
+                      <button type="submit" name="dec" class="btn btn-danger">Decline Invitation</button>
+                      </form>
                     </div>
                   </div>
                 </div>
               </div>
-
-
-
             </div>
           </div>
-
         </div>
     </div>
     </div>

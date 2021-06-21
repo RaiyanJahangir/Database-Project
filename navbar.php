@@ -147,16 +147,10 @@ include "session.php";
                         </li>
                         <?php endif;?>
                         <li>
-                              <a href="service.html">Purchase Blood</a>
+                              <a href="#">Purchase Blood</a>
                         </li>
                         <li>
                               <a href="blood_list.php">Check Available Blood</a>
-                        </li>
-                        <li>
-                              <a href="#">Services</a>
-                        </li>
-                        <li>
-                              <a href="blog.html">About us</a>
                         </li>
                         <li>
                               <a href="contact.html">Contacts</a>

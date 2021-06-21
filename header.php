@@ -45,7 +45,7 @@
                         <h2 class="text-white text-bold mb-2">Save a Life Donate blood!</h2>
                         <p class="tag-text mb-5">One pint of blood can save the life... 
                             </p>
-                        <a href="shop.html" class="btn btn-main btn-white">Donate Now</a>
+                        <a href="donate.php" class="btn btn-main btn-white">Donate Now</a>
                     </div>
                     <!-- Slide Content End -->
                 </div>

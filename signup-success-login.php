@@ -10,7 +10,11 @@ if(isset($_POST['save']))
     $address_postal=$_POST['organization-postal'];
     $address_city=$_POST['organization-city'];
     $pass=$_POST['password'];
-	$query = oci_parse($conn, "INSERT INTO organization(org_name,org_email,org_phn,org_street,org_postal,org_branch,org_city,pass) values ('$nam','$email','$phn_no','$address_street','$address_branch','$address_postal','$address_city','$pass')");
+	$query = oci_parse($conn, "declare
+	a nvarchar2(50);
+	begin
+	create_organization(a,'$email','$address_city',$address_postal','$address_city','$address_postal','$nam','$pass');
+	end;");
 	$result = oci_execute($query);
 	if ($result) {
 				echo "Registered successfully !";

@@ -38,7 +38,7 @@ session_start();
                   <h6>Opening Hours : Saturday to Tuesday - 8am to 10pm</h6>
             </div>
             <div class="top-right">
-                  <ul class="social-links">
+                  <ul class="social-links" style="align: center;">
                         <li>
                               <a href="#">
                                     <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -124,19 +124,16 @@ session_start();
                   </button>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"  style="justify-content: center;">
                   <ul class="nav navbar-nav">
                         <li>
-                              <a href="donate.php">Donation Request</a>
+                              <a href="donation-pending-request.php">Donation Request</a>
                         </li>
                         <li>
-                              <a href="service.html">Purschase Request</a>
+                              <a href="test-carried-out.php">Tests Carried Out</a>
                         </li>
                         <li>
-                              <a href="team.html">Eligible Candidate List</a>
-                        </li>
-                        <li>
-                              <a href="appointment.html">Person List</a>
+                              <a href="blood_bank_blood_details.php">Blood Bank Details</a>
                         </li>
                   </ul>
             </div>

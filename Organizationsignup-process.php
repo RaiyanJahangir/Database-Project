@@ -15,7 +15,12 @@ if(isset($_POST['save']))
 
 	
 
-	$query = oci_parse($conn, "INSERT INTO organization(org_email,org_city,org_postal,org_branch,org_street,org_name,org_pass) values ('$email','$address_city','$address_postal','$address_branch','$address_street','$nam','$pass')");
+	$query = oci_parse($conn, "declare
+	a nvarchar2(50);
+	begin
+	create_organization(a,'$email','$address_city','$address_postal','$address_city','$address_postal',
+	'$nam','$pass');
+	end;");
 	$result = oci_execute($query);
 	if ($result) {
 				include 'login.php';
