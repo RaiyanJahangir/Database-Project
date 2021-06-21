@@ -30,6 +30,7 @@ $row=oci_fetch_array($query,OCI_BOTH);
               <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
               <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
               <!--<li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>-->
+              <li><a href="orgpurchasetable.php"> <i class="fa fa-edit"></i>Purchase  Information</a></li>
               <form action="org_profile_edit.php" method="post">
 
                   <input type="hidden" name="edit_id" value="<?php //echo $_SESSION['pid'] 

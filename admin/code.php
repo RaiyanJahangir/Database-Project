@@ -367,4 +367,158 @@ if(isset($_POST['update_event_btn']))
     }
 }
 
+
+if(isset($_POST['approved_btn']))
+{
+    $id=$_POST['approved_id'];
+    $reqid=$id;
+    
+    //$username=$_POST['edit_username'];
+    //$email=$_POST['edit_email'];
+    //$password=$_POST['edit_password'];
+
+    $query = oci_parse($connection,"Update PURCHASE_REQUEST set purchase_request_status='ACCEPTED' where purchase_request_id='$id'");
+    $query_run = oci_execute($query);
+
+    if($query_run)
+    { 
+        $_SESSION['success']='Your Data is Updated';
+        header('location:purchaseinfo.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Updated';
+        header('location:purchaseinfo.php');
+    }
+}
+
+if(isset($_POST['declined_btn']))
+{
+    $id=$_POST['declined_id'];
+    //$username=$_POST['edit_username'];
+    //$email=$_POST['edit_email'];
+    //$password=$_POST['edit_password'];
+
+    $query = oci_parse($connection,"Update PURCHASE_REQUEST set purchase_request_status='DECLINED' where purchase_request_id='$id'");
+    $query_run = oci_execute($query);
+
+    if($query_run)
+    {
+        $_SESSION['success']='Your Data is Updated';
+        header('location:purchaseinfo.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Updated';
+        header('location:purchaseinfo.php');
+    }
+}
+
+if(isset($_POST['appointed_btn']))
+{
+    $bagid=$_POST['appointed_id'];
+    $reqbagid=$_POST['reqbagid'];
+    $reqtype=$_POST['reqtype'];
+    $reqgroup=$_POST['reqbloods'];
+    
+    
+    //$username=$_POST['edit_username'];
+    //$email=$_POST['edit_email'];
+    //$password=$_POST['edit_password'];
+    
+    //echo "anika";
+    $query = oci_parse($connection,"Update BLOOD_BANK set blood_request_id='$reqbagid' wherE blood_bank_blood_bag_id='$bagid'");
+    $query_run = oci_execute($query);
+
+    $query_string="select MAX(blood_bank_total_no) from blood_bank
+    where blood_bank_blood_type='$reqtype' and blood_bank_blood_group='$reqgroup'";
+    $query=oci_parse($connection,$query_string);
+    $query_run = oci_execute($query);
+    
+    echo $query_string; 
+    $row=oci_fetch_array($query);
+    $noofblood=$row['MAX(BLOOD_BANK_TOTAL_NO)']-1;
+    echo $noofblood;
+
+
+    $query=oci_parse($connection,"UPDATE BLOOD_BANK SET blood_bank_total_no=$noofblood
+                      where blood_bank_blood_type='$reqtype' and blood_bank_blood_group='$reqgroup'");
+    $query_run = oci_execute($query);
+
+    
+    if($_SESSION['pid']==$_SESSION[$_SESSION['pid']])
+    {
+    $query=oci_parse($connection,"update blood_bank set blood_bank_patient_id =(select purchase_person_id
+                                  from purchase_request
+                                  where purchase_request_id='$reqbagid') where blood_bank_blood_bag_id='$bagid'");
+    }
+    else
+    {
+        $patientid=$_SESSION[$_SESSION['pid']];
+        $query=oci_parse($connection,"update blood_bank set blood_bank_patient_id ='$patientid' where blood_bank_blood_bag_id='$bagid'");
+    }
+
+    
+    $query_run2 = oci_execute($query);
+    
+    if($query_run2)
+    { 
+        $_SESSION['success']='Your Data is Updated';
+        header('location:bloodbank.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Updated';
+        header('location:bloodbank.php');
+    }
+}
+
+
+
+if(isset($_POST['orgapproved_btn']))
+{
+    $id=$_POST['orgapproved_id'];
+    $reqid=$id;
+    
+    //$username=$_POST['edit_username'];
+    //$email=$_POST['edit_email'];
+    //$password=$_POST['edit_password'];
+
+    $query = oci_parse($connection,"Update PURCHASE_REQUEST set purchase_request_status='ACCEPTED' where purchase_request_id='$id'");
+    $query_run = oci_execute($query);
+
+    if($query_run)
+    { 
+        $_SESSION['success']='Your Data is Updated';
+        header('location:orgpurchaseinfo.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Updated';
+        header('location:orgpurchaseinfo.php');
+    }
+}
+
+if(isset($_POST['orgdeclined_btn']))
+{
+    $id=$_POST['orgdeclined_id'];
+    //$username=$_POST['edit_username'];
+    //$email=$_POST['edit_email'];
+    //$password=$_POST['edit_password'];
+
+    $query = oci_parse($connection,"Update PURCHASE_REQUEST set purchase_request_status='DECLINED' where purchase_request_id='$id'");
+    $query_run = oci_execute($query);
+
+    if($query_run)
+    {
+        $_SESSION['success']='Your Data is Updated';
+        header('location:orgpurchaseinfo.php');
+    }
+    else
+    {
+        $_SESSION['status']='Your Data is Not Updated';
+        header('location:orgpurchaseinfo.php');
+    }
+}
+
 ?>

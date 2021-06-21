@@ -147,7 +147,7 @@ include "session.php";
                         </li>
                         <?php endif;?>
                         <li>
-                              <a href="#">Purchase Blood</a>
+                              <a href="patientoption.php">Purchase Blood</a>
                         </li>
                         <li>
                               <a href="blood_list.php">Check Available Blood</a>
