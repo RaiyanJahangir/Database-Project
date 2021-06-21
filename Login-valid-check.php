@@ -57,6 +57,9 @@ if(isset($_POST['save']))
         $_SESSION['ppur']=$row['PERSON_NO_OF_PURCHASE'];
         $_SESSION['ppass']=$row['PERSON_PASSWORD'];
         $_SESSION['age']=$row['PERSON_AGE'];
+
+        $_SESSION[$_SESSION['pid']]=$_SESSION['pid'];
+        
         break;
     }
     }
