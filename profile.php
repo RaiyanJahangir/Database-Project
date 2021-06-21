@@ -124,12 +124,17 @@ include "header-small.php";
 where d.req_state='DONATED' and p.person_id='$id' and p.person_id=e.eligibility_person_id and e.eligibility_request_id=d.req_id
 ");
     		                oci_execute($query);
-    		                echo $row = oci_fetch_all($query,$res);
+                            if(!$row)$row=0;
+    		                $row = oci_fetch_all($query,$res);
+                            $query=oci_parse($conn,"Update person set person_no_of_donation='$row' 
+                            where person_id='$id'");
+                            oci_execute($query);
+                            echo $row;
 		                ?>
                       </p>
                   </div>
                   <div class="bio-row">
-                      <p><span>No. of Purchase </span>: <?php echo $row['PERSON_NO_OF_PURCHASE'];?></p>
+                      <p><span>No. of Purchase </span>: <?php //echo $row['PERSON_NO_OF_PURCHASE'];?></p>
                   </div>
                   
               </div>

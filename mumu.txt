@@ -41,7 +41,7 @@ as
 begin
 bb_id:='BB_'||blood_bag_id_gen.nextval;
 bb_dd:=to_date(sysdate,'dd-mm-yyyy');
-If bb_event='none' then bb_event_id:=null;
+If bb_event='none' or bb_event='None'  then bb_event_id:=null;
 else 
  select event_id into bb_event_id from event where event_name=bb_event;
 end if;
