@@ -1,0 +1,233 @@
+create table blood_bank(
+     blood_bank_event_id nvarchar2(64),
+     blood_request_id nvarchar2(64),
+     blood_bank_donor_id nvarchar2(64),
+     blood_bank_patient_id nvarchar2(64),
+     blood_Bank_test_id nvarchar2(64),
+
+     blood_bank_blood_bag_id nvarchar2(64),
+     blood_bank_blood_group nvarchar2(10),
+     blood_bank_blood_type nvarchar2(64),
+     blood_datedonation date ,
+     blood_bank_total_no number,
+     blood_expiration_date date,
+     
+     CONSTRAINT blood_bank_bag_id_pk PRIMARY KEY (blood_bank_blood_bag_id),
+     
+     CONSTRAINT blood_bank_event_id_fk FOREIGN KEY (blood_bank_event_id)
+     REFERENCES event(event_id) on delete set null,
+     
+     CONSTRAINT blood_bank_request_id_fk FOREIGN KEY (blood_request_id)
+     REFERENCES purchase_request(purchase_request_id) on delete set null,
+     
+     CONSTRAINT blood_bank_donor_id_fk FOREIGN KEY (blood_bank_donor_id)
+     REFERENCES person(person_id) on delete set null,
+     
+     CONSTRAINT blood_bank_patient_id_fk FOREIGN KEY (blood_bank_patient_id)
+     REFERENCES person(person_id) on delete set null,
+     
+     CONSTRAINT blood_Bank_test_id_fk FOREIGN KEY (blood_Bank_test_id)
+     REFERENCES eligibility_test(test_id) on delete set null
+    
+     
+);
+create sequence blood_bag_id_gen START WITH 1;
+
+--Blood bank bag insertion
+create or replace procedure 
+place_donation_request(bb_id out nvarchar2,p_id in nvarchar2,bb_grp in nvarchar2,bb_type in nvarchar2,bb_dd out date,bb_total out number,
+bb_expire out date,bb_event in nvarchar2,bb_event_id out nvarchar2,bb_test_id out nvarchar2,d_id in nvarchar2)
+as
+begin
+bb_id:='BB_'||blood_bag_id_gen.nextval;
+bb_dd:=to_date(sysdate,'dd-mm-yyyy');
+If bb_event='none' then bb_event_id:=null;
+else 
+ select event_id into bb_event_id from event where event_name=bb_event;
+end if;
+select eligibility_test_id into bb_test_id from eligibility where eligibility_request_id=d_id;
+select max(blood_bank_total_no) into bb_total from blood_bank where blood_bank_blood_type=bb_type and blood_bank_blood_group=bb_grp; 
+if bb_total is null then
+    bb_total:=1;
+else
+    bb_total:=bb_total+1;
+    update blood_bank set blood_bank_total_no=bb_total where blood_bank_blood_group=bb_grp and blood_bank_blood_type=bb_type;
+end if;
+if upper(bb_type)='WHOLE BLOOD' then
+    bb_expire:=sysdate+35;
+elsif upper(bb_type)='PLASMA' then 
+    bb_expire:=sysdate+365;
+elsif upper(bb_type)='RBC' then
+    bb_expire:=sysdate+42;
+elsif upper(bb_type)='PLATELETS' then
+    bb_expire:=sysdate+5;
+elsif upper(bb_type)='CRYO' then
+    bb_expire:=sysdate+365;
+elsif upper(bb_type)='WBC' then
+    bb_expire:=sysdate+1;
+end if;
+insert into blood_bank(blood_bank_blood_bag_id,blood_bank_blood_group,blood_bank_blood_type,blood_datedonation,blood_bank_total_no,
+blood_expiration_date,blood_bank_event_id,blood_request_id,blood_bank_donor_id,blood_bank_patient_id,blood_Bank_test_id)
+values(bb_id,bb_grp,bb_type,bb_dd,bb_total,bb_expire,bb_event_id,null,p_id,null,bb_test_id);
+Update donation_request set req_state='DONATED' where req_id=d_id;
+end;
+declare
+a nvarchar2(50);
+b nvarchar2(50);
+c date;
+d number;
+e date;
+f nvarchar2(50);
+g nvarchar2(50);
+begin
+place_donation_request(a,'C_1','O+',upper('Plasma'),c,d,e,'none',f,g,'DR_3');
+end;
+
+
+
+
+
+
+
+create table eligibility_test
+(
+    test_id nvarchar2(64) constraint eligibility_test_test_id_pk primary key,
+    screening_test_hepatitis_b nvarchar2(64),
+    screening_test_hepatitis_c nvarchar2(64),
+    screening_test_hiv nvarchar2(64),
+    screening_test_syphilis nvarchar2(64),
+    test_date date,
+    state nvarchar2(64),
+    last_date_of_donation date,
+    whole_blood_eligibility nvarchar2(64),
+    plasma_eligibility nvarchar2(64),
+    rbc_eligibility nvarchar2(64),
+    wbc_eligibility nvarchar2(64),
+    platelets_eligibility nvarchar2(64),
+    cryo_eligibility nvarchar2(64)
+);
+create sequence test_id_gen start with 1;
+
+--eligibility test table update with tester
+create or replace procedure 
+eligibility_test_table_update(test_date out nvarchar2,d_id in nvarchar2,test_id out nvarchar2,hep_b in nvarchar2,
+hep_c in nvarchar2,hiv in nvarchar2,syphilies in nvarchar2,whole_blood in nvarchar2,plasma in nvarchar2,wbc in nvarchar2,
+rbc in nvarchar2,platelates in nvarchar2,cryo in nvarchar2,status in nvarchar2,lod in nvarchar2,m_id in nvarchar2) as
+begin
+test_id:='TI_'||test_id_gen.nextval;
+test_date:=to_date(sysdate,'dd-mm-yyyy');
+insert into eligibility_test(test_id,screening_test_hepatitis_b,screening_test_hepatitis_c,screening_test_hiv,
+screening_test_syphilis,test_date,whole_blood_eligibility,plasma_eligibility,wbc_eligibility,rbc_eligibility,
+platelets_eligibility,cryo_eligibility,state,last_date_of_donation)
+values(test_id,hep_b,hep_c,hiv,syphilies,test_date,whole_blood,plasma,wbc,rbc,platelates,cryo,status,lod);
+Update eligibility set eligibility_test_id=test_id where eligibility_request_id=d_id;
+if status='PASSED' then Update donation_request set req_state='PASSED' where req_id=d_id;
+elsif status='NOT PASSED' then Update donation_request set req_state='NOT PASSED' where req_id=d_id;
+end if;
+insert into tester(test_id, tester_result,medical_officer_id) values (test_id,status,m_id);
+end;
+declare
+a date;
+b nvarchar2(50);
+begin
+eligibility_test_table_update(a,'DR_5',b,'Eligible','Eligible','Eligible','Eligible','Eligible',null,null,null,null,null,
+'PASSED',sysdate,'MO_1');
+end;
+
+
+
+
+
+
+create table tester(
+
+     test_id  nvarchar2(64) not null, 
+     tester_result   nvarchar2(64) default null,
+     medical_officer_id nvarchar2(64) not null,
+     
+     CONSTRAINT tester_medical_officer_id_fk FOREIGN KEY (medical_officer_id)
+     REFERENCES medical_officer(medical_officer_id) on delete set null,
+     
+     CONSTRAINT tester_test_id_fk FOREIGN KEY (test_id)
+     REFERENCES eligibility_test(test_id) on delete set null
+);
+
+
+
+
+
+
+
+
+create table eligibility(
+     eligibility_person_id nvarchar2(64),
+     eligibility_request_id nvarchar2(64),
+     eligibility_test_id nvarchar2(64),
+     
+     
+     CONSTRAINT eligibility_person_id_fk FOREIGN KEY (eligibility_person_id)
+     REFERENCES person(person_id) on delete set null,
+     
+     CONSTRAINT eligibility_test_id_fk FOREIGN KEY (eligibility_test_id)
+     REFERENCES eligibility_test(test_id) on delete set null,
+     
+     CONSTRAINT eligibility_request_id_fk FOREIGN KEY (eligibility_request_id)
+     REFERENCES donation_request(req_id) on delete set null
+);
+; 
+
+--When someone requested for donation (both donation_rqst and eligibility will be inserted)
+create or replace procedure 
+rqst_for_donation(p_id in nvarchar2,rqst_id out nvarchar2,rqst_date out date,req_type in nvarchar2,req_message in nvarchar2,req_event in nvarchar2) as
+begin
+rqst_id:='DR_'||req_id_gen.nextval;
+rqst_date:=to_date(sysdate,'dd-mm-yyyy');
+insert into donation_request(req_id,req_date,req_type,req_message,req_event,req_state)values(rqst_id,rqst_date,req_type,req_message,req_event,'PENDING');
+insert into eligibility(eligibility_person_id,eligibility_request_id,eligibility_test_id) values(p_id,rqst_id,null);
+end;
+
+declare
+a nvarchar2(64);
+b date;
+begin
+rqst_for_donation('C_1',a,b,'PLASMA','no','none');
+end;
+
+
+
+
+
+
+
+create table donation_request
+(
+    req_id nvarchar2(64) constraint donation_request_request_id_pk primary key,
+    req_date date default null,
+    req_type nvarchar2(64),
+    req_state nvarchar2(64),
+    req_message nvarchar2(120) default null,
+    req_event nvarchar2(64) default null
+);
+--donation request sequence
+create sequence req_id_gen START WITH 1;
+--donation request placing
+create or replace procedure 
+rqst_for_donation(p_id in nvarchar2,rqst_id out nvarchar2,rqst_date out date,req_type in nvarchar2,req_message in nvarchar2,req_event in nvarchar2) as
+begin
+rqst_id:='DR_'||req_id_gen.nextval;
+rqst_date:=to_date(sysdate,'dd-mm-yyyy');
+insert into donation_request(req_id,req_date,req_type,req_message,req_event,req_state)values(rqst_id,rqst_date,req_type,req_message,req_event,'PENDING');
+insert into eligibility(eligibility_person_id,eligibility_request_id,eligibility_test_id) values(p_id,rqst_id,null);
+end;
+
+declare
+a nvarchar2(64);
+b date;
+begin
+rqst_for_donation('C_1',a,b,'PLASMA','no','none');
+end;
+
+
+
+
+

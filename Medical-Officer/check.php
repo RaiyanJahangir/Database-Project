@@ -109,7 +109,7 @@ if(isset($_POST['donated_btn'])){
     f nvarchar2(50);
     g nvarchar2(50);
     begin
-    create_blood_bag(a,'$pid','$bgroup','$type',c,d,e,'$event',f,g,'$did');
+    place_donation_request(a,'$pid','$bgroup','$type',c,d,e,'$event',f,g,'$did');
     end;");
     $query_run = oci_execute($query);
     if($query_run)
