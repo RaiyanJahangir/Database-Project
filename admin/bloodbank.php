@@ -12,7 +12,7 @@ if(isset($_POST['approved_btn']))
     $_SESSION['reqid']=$_POST['approved_id'];
     $_SESSION['bag']=1;
     
-    
+    error_reporting(0);
   
 }
     
@@ -103,10 +103,10 @@ if(isset($_POST['approved_btn']))
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Person Profile 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+    <h6 class="m-0 font-weight-bold text-primary">Product List
+           <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
               Add Person Profile 
-            </button>
+            </button>-->
     </h6>
   </div>
 
