@@ -153,7 +153,7 @@ include "session.php";
                               <a href="blood_list.php">Check Available Blood</a>
                         </li>
                         <li>
-                              <a href="contact.html">Contacts</a>
+                              <a href="contact.php">Contacts</a>
                         </li>
                         <?php if($_SESSION['plogin'] == false) : ?>
                         <li>

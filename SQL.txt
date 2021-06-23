@@ -653,6 +653,7 @@ create table contact
     name nvarchar2(50),
     email nvarchar2(50),
     phone nvarchar2(50),
-    message nvarchar2(50)
+    message nvarchar2(50),
+    time date
 );
 
