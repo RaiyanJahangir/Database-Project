@@ -287,6 +287,27 @@ end;
 
 
 --Event 
+create table tester(
+
+     test_id  nvarchar2(64) not null, 
+     tester_result   nvarchar2(64) default null,
+     medical_officer_id nvarchar2(64) not null,
+     
+     CONSTRAINT tester_medical_officer_id_fk FOREIGN KEY (medical_officer_id)
+     REFERENCES medical_officer(medical_officer_id) on delete set null,
+     
+     CONSTRAINT tester_test_id_fk FOREIGN KEY (test_id)
+     REFERENCES eligibility_test(test_id) on delete set null
+);
+
+create view test_view as
+select et.test_id,et.test_date,d.req_id ,p.person_name,
+                    p.person_bloodgroup,d.req_type,d.req_event,et.state ,d.req_state from donation_request d ,
+                    eligibility e,person p,eligibility_test et
+                    where e.eligibility_request_id=d.req_id and p.person_id=e.eligibility_person_id 
+                    and e.eligibility_test_id=et.test_id;
+
+--Event
 create table event(
  event_id      nvarchar2(64) not null, 
  event_name  nvarchar2(64) not null,

@@ -126,13 +126,6 @@ elsif status='NOT PASSED' then Update donation_request set req_state='NOT PASSED
 end if;
 insert into tester(test_id, tester_result,medical_officer_id) values (test_id,status,m_id);
 end;
-declare
-a date;
-b nvarchar2(50);
-begin
-eligibility_test_table_update(a,'DR_5',b,'Eligible','Eligible','Eligible','Eligible','Eligible',null,null,null,null,null,
-'PASSED',sysdate,'MO_1');
-end;
 
 
 

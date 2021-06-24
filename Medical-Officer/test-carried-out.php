@@ -39,11 +39,7 @@
             <tbody>
                     <?php
                     error_reporting(0);
-                    $stid = oci_parse($conn, 'select et.test_id,et.test_date,d.req_id ,p.person_name,
-                    p.person_bloodgroup,d.req_type,d.req_event,et.state ,d.req_state from donation_request d ,
-                    eligibility e,person p,eligibility_test et
-                    where e.eligibility_request_id=d.req_id and p.person_id=e.eligibility_person_id 
-                    and e.eligibility_test_id=et.test_id');
+                    $stid = oci_parse($conn, 'select * from test_view');
                     oci_execute($stid);
                     while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                     ?><tr><td><?php echo $row[0] ?></td><?php

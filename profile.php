@@ -39,8 +39,8 @@ include "header-small.php";
               <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
               <li><a href="donation_req_check.php"> <i class="fa fa-edit"></i> Donation Request Check</a></li>
               <li><a href="purchasetable.php"> <i class="fa fa-edit"></i> Purchase List</a></li>
+              <li class="active"><a href="contact.php"> <i class="fa fa-user"></i> Contact with admin</a></li>
               <li><form action="profile_edit.php" method="post">
-
                   <input type="hidden" name="edit_id" value="<?php //echo $_SESSION['pid'] 
                   echo $row['PERSON_ID']
                   ?>">
@@ -119,7 +119,7 @@ include "header-small.php";
                       echo $row['PERSON_PORTAL'];?></p>
                   </div>
                   <div class="bio-row">
-                      <p><span>No. of Donation </span>: <?php echo $row['PERSON_NO_OF_DONATION'];?>
+                      <p><span>No. of Donation </span>: 
                       <?php
 		                    $query = oci_parse($conn, "select * from donation_request d,eligibility e,person p
                       where d.req_state='DONATED' and p.person_id='$id' and p.person_id=e.eligibility_person_id and e.eligibility_request_id=d.req_id
@@ -131,11 +131,12 @@ include "header-small.php";
                             where person_id='$id'");
                             oci_execute($query);
                             echo $row;
+                            //echo $row['PERSON_NO_OF_DONATION'];
 		                ?>
                       </p>
                   </div>
                   <div class="bio-row">
-                      <p><span>No. of Purchase </span>: <?php //echo $row['PERSON_NO_OF_PURCHASE'];?></p>
+                      <p><span>No. of Purchase </span>: <?php echo $row['PERSON_NO_OF_PURCHASE'];?></p>
                   </div>
                   
               </div>

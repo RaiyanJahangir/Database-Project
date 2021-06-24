@@ -82,7 +82,7 @@ include 'header.php';
             <div class="col-md-8">
                 <div class="contact-form">
                     <!-- contact form start -->
-                    <form action="contact_process.php" class="row">
+                    <form action="contact_process.php" class="row" method="post">
                         <!-- name -->
                         <div class="col-md-6">
                             <input type="text" name="name" class="form-control main" placeholder="Name" required>
