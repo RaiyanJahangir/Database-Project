@@ -53,9 +53,9 @@ include('includes/navbar.php');
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">DETAILS BLOOD BAG INFO
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
               Add Person Profile 
-            </button>
+            </button>-->
     </h6>
   </div>
 

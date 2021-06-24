@@ -12,7 +12,7 @@
     include_once '../database.php';
     include "navbar.php";
     include "header-small.php";
-    echo $mid=$_SESSION['mid'];
+    //echo $mid=$_SESSION['mid'];
     ?>
     <br>
     <br>
@@ -36,13 +36,13 @@
                     <th>Invitation</th>
                     <th>Test Result</th>
                     <th>Donated Blood</th>
-                    <th>Did Not Donated Blood</th>
+                    <th>Did Not Donate Blood</th>
                 </tr>
             </thead>
             <tbody>
                     <?php
                     error_reporting(0);
-                    $stid = oci_parse($conn, 'SELECT * FROM donation_request');
+                    $stid = oci_parse($conn, 'SELECT * FROM donation_request order by req_id');
                     oci_execute($stid);
                     while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                     $invitation=$row['REQ_STATE'];

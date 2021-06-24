@@ -75,7 +75,7 @@ include('includes/navbar.php');
 
 
 
-$query=oci_parse($connection,"select * from admin");
+$query=oci_parse($connection,"select * from admin order by id");
 $query_run=oci_execute($query);
 
 

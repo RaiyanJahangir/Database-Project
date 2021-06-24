@@ -70,7 +70,7 @@
       <h6 class="collapse-header">Other Tables:</h6>
       <a class="collapse-item" href="CreateMedicalOfficer.php">Medical Officers</a>
       <a class="collapse-item" href="Person.php">Users</a>
-      <a class="collapse-item" href="donation_rqst.php">Donation Requests</a>
+      <a class="collapse-item" href="check_contacts.php">Contacts</a>
       <a class="collapse-item" href="events.php">Events</a>
     </div>
   </div>

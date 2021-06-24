@@ -75,7 +75,7 @@ include('includes/navbar.php');
 
 
 
-$query=oci_parse($connection,"select * from person");
+$query=oci_parse($connection,"select * from person order by person_id");
 $query_run=oci_execute($query);
 
 

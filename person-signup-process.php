@@ -25,12 +25,13 @@ if(isset($_POST['save']))
 
 	
 
-	$query = oci_parse($conn,"declare
-a nvarchar2(50);
-b numeric;
-begin
-create_person(a,'$name','$email','$password','$phone','$job','$height','$weight','$blood','$gender','$history','$chronic','$apartment','$street' ,'$city','$postal','$birth' , to_date('$dob','yyyy-mm-dd'),b);
-end;");
+		$query = oci_parse($conn,"declare
+		a nvarchar2(50);
+		b numeric;
+		c numeric;
+		begin
+		create_person(a,'$name','$email','$password','$phone','$job','$height','$weight','$blood','$gender','$history','$chronic','$apartment','$street' ,'$city','$postal','$birth' , to_date('$dob','yyyy-mm-dd'),b,c);
+		end;");
 
 	$result = oci_execute($query);
 	if ($result) {
