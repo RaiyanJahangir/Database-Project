@@ -152,12 +152,9 @@ include "session.php";
                         <li>
                               <a href="blood_list.php">Check Available Blood</a>
                         </li>
-<<<<<<< Updated upstream
                         <li>
                               <a href="contact.php">Contacts</a>
                         </li>
-=======
->>>>>>> Stashed changes
                         <?php if($_SESSION['plogin'] == false) : ?>
                         <li>
                              <!-- <a href="admin/login.php">Admin</a>-->

@@ -27,6 +27,106 @@ drop sequence test_id_gen;
 drop view mo_view;
 drop view product_view;
 
+
+
+
+
+create table admin
+(
+    id nvarchar2(64) primary key,
+    username nvarchar2(64),
+    email nvarchar2(64),
+    password nvarchar2(64)
+);
+
+insert into admin (username,email,password) values ('Raiyan','raiyan.jahangir@gmail.com','12345');
+update admin set username='Robin' , email='robin@yahoo.com' where id='3';
+commit;
+select * from admin;
+
+create sequence admin_id_gen start with 1;
+CREATE OR REPLACE TRIGGER admin_bir 
+BEFORE INSERT ON admin 
+FOR EACH ROW
+
+BEGIN
+  SELECT admin_id_gen.NEXTVAL
+  INTO   :new.id
+  FROM   dual;
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+create table organization(
+ org_id      nvarchar2(64) not null, 
+ org_email  nvarchar2(64) not null,
+ org_city nvarchar2(64) not null,
+ org_postal nvarchar2(64) not null,
+ org_branch nvarchar2(64) not null,
+ org_street nvarchar2(64) not null,
+ org_name nvarchar2(64) not null,
+ org_no_of_purchase number default 0,
+ org_pass nvarchar2(64) not null,
+ CONSTRAINT organization_org_id_pk PRIMARY KEY (org_id)
+);
+
+create sequence org_id_gen
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+--Organization
+create or replace procedure create_organization(o_id out nvarchar2,o_email in nvarchar2,o_city in nvarchar2,o_postal in nvarchar2,
+o_branch in nvarchar2,o_street in nvarchar2,o_name in nvarchar2,o_pass in nvarchar2)
+as 
+begin
+o_id:='O_'||org_id_gen.nextval;
+insert into organization(org_id,org_email,org_city,org_postal,org_branch,org_street,org_name,org_pass) 
+values(o_id,o_email,o_city,o_postal,o_branch,o_street,o_name,o_pass);
+end;
+
+declare
+a nvarchar2(50);
+begin
+create_organization(a,'area@gmail.com','dhaka','2222','dhanmondi','road 11','Port Bank','1234');
+end;
+
+
+
+
+
+
+
+
+create table contact
+(
+    name nvarchar2(50),
+    email nvarchar2(50),
+    phone nvarchar2(50),
+    message nvarchar2(50),
+    time date
+);
+
+
+
+
+
+
+
+
+
+
+
+
 create table person
 (
     person_id nvarchar2(64) constraint person_person_id_pk primary key,
@@ -51,10 +151,11 @@ create table person
     person_no_of_purchase numeric(12) default 0,
     person_birth_certificate_no nvarchar2(64) constraint person_birth_certificate_uk unique
 );
+
 select * from person;
 
 --INSERT INTO PERSON(person_name,person_email,person_password,person_phonenumber,person_profession,person_height,person_weight,person_bloodgroup,person_gender,person_prevhistory,person_chronicdis,person_apartment, person_street,person_city,person_portal,person_birth_certificate_no,person_dob) 
-	--VALUES('Roton','roton@gmail.com','12345','123','self-employed','500','85','O+','Male','None','None','An Apartment','A street' ,' Acity','A postal','6667' , to_date('1998-04-22','yyyy-mm-dd'));
+--VALUES('Roton','roton@gmail.com','12345','123','self-employed','500','85','O+','Male','None','None','An Apartment','A street' ,' Acity','A postal','6667' , to_date('1998-04-22','yyyy-mm-dd'));
 
 create sequence person_id_gen
 MINVALUE 1
@@ -130,182 +231,22 @@ begin
 donated_blood('C_1',total_donation);
 end;
 
-create table eligibility_test
-(
-    test_id nvarchar2(64) constraint eligibility_test_test_id_pk primary key,
-    screening_test_hepatitis_b nvarchar2(64),
-    screening_test_hepatitis_c nvarchar2(64),
-    screening_test_hiv nvarchar2(64),
-    screening_test_syphilis nvarchar2(64),
-    test_date date,
-    state nvarchar2(64),
-    last_date_of_donation date,
-    whole_blood_eligibility nvarchar2(64),
-    plasma_eligibility nvarchar2(64),
-    rbc_eligibility nvarchar2(64),
-    wbc_eligibility nvarchar2(64),
-    platelets_eligibility nvarchar2(64),
-    cryo_eligibility nvarchar2(64)
-);
-create sequence test_id_gen start with 1;
-
---eligibility test table update with tester
-create or replace procedure 
-eligibility_test_table_update(test_date out nvarchar2,d_id in nvarchar2,test_id out nvarchar2,hep_b in nvarchar2,
-hep_c in nvarchar2,hiv in nvarchar2,syphilies in nvarchar2,whole_blood in nvarchar2,plasma in nvarchar2,wbc in nvarchar2,
-rbc in nvarchar2,platelates in nvarchar2,cryo in nvarchar2,status in nvarchar2,lod in nvarchar2,m_id in nvarchar2) as
-begin
-test_id:='TI_'||test_id_gen.nextval;
-test_date:=to_date(sysdate,'dd-mm-yyyy');
-
-insert into eligibility_test(test_id,screening_test_hepatitis_b,screening_test_hepatitis_c,screening_test_hiv,
-screening_test_syphilis,test_date,whole_blood_eligibility,plasma_eligibility,wbc_eligibility,rbc_eligibility,
-platelets_eligibility,cryo_eligibility,state,last_date_of_donation)
-
-values(test_id,hep_b,hep_c,hiv,syphilies,test_date,whole_blood,plasma,wbc,rbc,platelates,cryo,status,lod);
-
-Update eligibility set eligibility_test_id=test_id where eligibility_request_id=d_id;
-
-if status='PASSED' then Update donation_request set req_state='PASSED' where req_id=d_id;
-elsif status='NOT PASSED' then Update donation_request set req_state='NOT PASSED' where req_id=d_id;
-end if;
-insert into tester(test_id, tester_result,medical_officer_id) values (test_id,status,m_id);
-end;
-
-declare
-a date;
-b nvarchar2(50);
-begin
-eligibility_test_table_update(a,'DR_5',b,'Eligible','Eligible','Eligible','Eligible','Eligible',null,null,null,null,null,
-'PASSED',sysdate,'MO_1');
-end;
-
---56 days(WB)
---112 days(RBC)
---7 days(platelets)
---28 days(plasma)
---30 days(WBC)
-
-create table donation_request
-(
-    req_id nvarchar2(64) constraint donation_request_request_id_pk primary key,
-    req_date date default null,
-    req_type nvarchar2(64),
-    req_state nvarchar2(64),
-    req_message nvarchar2(120) default null,
-    req_event nvarchar2(64) default null
-);
---donation request sequence
-create sequence req_id_gen 
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1;
---donation request placing
-create or replace procedure 
-rqst_for_donation(p_id in nvarchar2,rqst_id out nvarchar2,rqst_date out date,req_type in nvarchar2,req_message in nvarchar2,req_event in nvarchar2) as
-begin
-rqst_id:='DR_'||req_id_gen.nextval;
-rqst_date:=to_date(sysdate,'dd-mm-yyyy');
-insert into donation_request(req_id,req_date,req_type,req_message,req_event,req_state)values(rqst_id,rqst_date,req_type,req_message,req_event,'PENDING');
-insert into eligibility(eligibility_person_id,eligibility_request_id,eligibility_test_id) values(p_id,rqst_id,null);
-end;
-
-declare
-a nvarchar2(64);
-b date;
-begin
-rqst_for_donation('C_1',a,b,'PLASMA','no','none');
-end;
 
 
-create table eligibility(
-     eligibility_person_id nvarchar2(64),
-     eligibility_request_id nvarchar2(64),
-     eligibility_test_id nvarchar2(64),
-     
-     
-     CONSTRAINT eligibility_person_id_fk FOREIGN KEY (eligibility_person_id)
-     REFERENCES person(person_id) on delete set null,
-     
-     CONSTRAINT eligibility_test_id_fk FOREIGN KEY (eligibility_test_id)
-     REFERENCES eligibility_test(test_id) on delete set null,
-     
-     CONSTRAINT eligibility_request_id_fk FOREIGN KEY (eligibility_request_id)
-     REFERENCES donation_request(req_id) on delete set null
-);
-
-create table tester(
-
-     test_id  nvarchar2(64) not null, 
-     tester_result   nvarchar2(64) default null,
-     medical_officer_id nvarchar2(64) not null,
-     
-     CONSTRAINT tester_medical_officer_id_fk FOREIGN KEY (medical_officer_id)
-     REFERENCES medical_officer(medical_officer_id) on delete set null,
-     
-     CONSTRAINT tester_test_id_fk FOREIGN KEY (test_id)
-     REFERENCES eligibility_test(test_id) on delete set null
-);
-
-create table medical_officer(
-       medical_officer_id nvarchar2(64) not null,
-       medical_officer_name  nvarchar2(64) not null, 
-       medical_officer_contracttime  date,
-       medical_officer_joindate date not null,
-       medical_officer_email nvarchar2(64) constraint mo_email_uk unique not null,
-       medical_officer_password nvarchar2(64),
- 
- 
- CONSTRAINT medical_officer_id_pk PRIMARY KEY (medical_officer_id)
-     
-);
-
-create sequence medical_officer_id_gen
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1;
-
---Creating an entity of medical officer
-create or replace procedure 
-create_medical_officer (mo_id out nvarchar2,mo_name in nvarchar2,mo_contract_time out date,mo_joindate out date,mo_email in nvarchar2,mo_password in nvarchar2)
-as
-begin
-mo_id:='MO_'||medical_officer_id_gen.nextval;
-mo_joindate:=to_date(sysdate,'dd-mm-yyyy');
-mo_contract_time:=mo_joindate+60;
-insert into medical_officer(medical_officer_id,medical_officer_name,medical_officer_contracttime,medical_officer_joindate,medical_officer_email,medical_officer_password)
-values(mo_id,mo_name,mo_contract_time,mo_joindate,mo_email,mo_password);
-end;
-
-declare
-a nvarchar2(50);
-b date;
-c date;
-begin
-create_medical_officer(a,'Dr. Hafiz Kabir',b,c,'hk@gmail.com','12345');
-end;
 
 
---Event 
-create table tester(
 
-     test_id  nvarchar2(64) not null, 
-     tester_result   nvarchar2(64) default null,
-     medical_officer_id nvarchar2(64) not null,
-     
-     CONSTRAINT tester_medical_officer_id_fk FOREIGN KEY (medical_officer_id)
-     REFERENCES medical_officer(medical_officer_id) on delete set null,
-     
-     CONSTRAINT tester_test_id_fk FOREIGN KEY (test_id)
-     REFERENCES eligibility_test(test_id) on delete set null
-);
 
-create view test_view as
-select et.test_id,et.test_date,d.req_id ,p.person_name,
-                    p.person_bloodgroup,d.req_type,d.req_event,et.state ,d.req_state from donation_request d ,
-                    eligibility e,person p,eligibility_test et
-                    where e.eligibility_request_id=d.req_id and p.person_id=e.eligibility_person_id 
-                    and e.eligibility_test_id=et.test_id;
+
+
+
+
+
+
+
+
+
+
 
 --Event
 create table event(
@@ -349,6 +290,371 @@ declare
 wrong_date_error exception;
 begin
 end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table donation_request
+(
+    req_id nvarchar2(64) constraint donation_request_request_id_pk primary key,
+    req_date date default null,
+    req_type nvarchar2(64),
+    req_state nvarchar2(64),
+    req_message nvarchar2(120) default null,
+    req_event nvarchar2(64) default null
+);
+--donation request sequence
+create sequence req_id_gen 
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+--donation request placing
+create or replace procedure
+rqst_for_donation(p_id in nvarchar2,rqst_id out nvarchar2,rqst_date out date,req_type in nvarchar2,req_message in nvarchar2,req_event in nvarchar2) as
+begin
+rqst_id:='DR_'||req_id_gen.nextval;
+rqst_date:=to_date(sysdate,'dd-mm-yyyy');
+insert into donation_request(req_id,req_date,req_type,req_message,req_event,req_state)values(rqst_id,rqst_date,req_type,req_message,req_event,'PENDING');
+insert into eligibility(eligibility_person_id,eligibility_request_id,eligibility_test_id) values(p_id,rqst_id,null);
+end;
+
+declare
+a nvarchar2(64);
+b date;
+begin
+rqst_for_donation('C_1',a,b,'PLASMA','no','none');
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table eligibility_test
+(
+    test_id nvarchar2(64) constraint eligibility_test_test_id_pk primary key,
+    screening_test_hepatitis_b nvarchar2(64),
+    screening_test_hepatitis_c nvarchar2(64),
+    screening_test_hiv nvarchar2(64),
+    screening_test_syphilis nvarchar2(64),
+    test_date date,
+    state nvarchar2(64),
+    last_date_of_donation date,
+    whole_blood_eligibility nvarchar2(64),
+    plasma_eligibility nvarchar2(64),
+    rbc_eligibility nvarchar2(64),
+    wbc_eligibility nvarchar2(64),
+    platelets_eligibility nvarchar2(64),
+    cryo_eligibility nvarchar2(64)
+);
+create sequence test_id_gen start with 1;
+
+--eligibility test table update with tester
+create or replace procedure
+eligibility_test_table_update(test_date out nvarchar2,d_id in nvarchar2,test_id out nvarchar2,hep_b in nvarchar2,
+hep_c in nvarchar2,hiv in nvarchar2,syphilies in nvarchar2,whole_blood in nvarchar2,plasma in nvarchar2,wbc in nvarchar2,
+rbc in nvarchar2,platelates in nvarchar2,cryo in nvarchar2,status in nvarchar2,lod in nvarchar2,m_id in nvarchar2) as
+begin
+test_id:='TI_'||test_id_gen.nextval;
+test_date:=to_date(sysdate,'dd-mm-yyyy');
+insert into eligibility_test(test_id,screening_test_hepatitis_b,screening_test_hepatitis_c,screening_test_hiv,
+screening_test_syphilis,test_date,whole_blood_eligibility,plasma_eligibility,wbc_eligibility,rbc_eligibility,
+platelets_eligibility,cryo_eligibility,state,last_date_of_donation)
+values(test_id,hep_b,hep_c,hiv,syphilies,test_date,whole_blood,plasma,wbc,rbc,platelates,cryo,status,lod);
+Update eligibility set eligibility_test_id=test_id where eligibility_request_id=d_id;
+if status='PASSED' then Update donation_request set req_state='PASSED' where req_id=d_id;
+elsif status='NOT PASSED' then Update donation_request set req_state='NOT PASSED' where req_id=d_id;
+end if;
+insert into tester(test_id, tester_result,medical_officer_id) values (test_id,status,m_id);
+end;
+
+declare
+a date;
+b nvarchar2(50);
+begin
+eligibility_test_table_update(a,'DR_5',b,'Eligible','Eligible','Eligible','Eligible','Eligible',null,null,null,null,null,
+'PASSED',sysdate,'MO_1');
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--medical_officer table
+create table medical_officer(
+       medical_officer_id nvarchar2(64) not null,
+       medical_officer_name  nvarchar2(64) not null, 
+       medical_officer_contracttime  date,
+       medical_officer_joindate date not null,
+       medical_officer_email nvarchar2(64) constraint mo_email_uk unique not null,
+       medical_officer_password nvarchar2(64),
+ 
+ 
+ CONSTRAINT medical_officer_id_pk PRIMARY KEY (medical_officer_id)
+     
+);
+
+create sequence medical_officer_id_gen
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+--Creating an entity of medical officer
+create or replace procedure 
+create_medical_officer (mo_id out nvarchar2,mo_name in nvarchar2,mo_contract_time out date,mo_joindate out date,mo_email in nvarchar2,mo_password in nvarchar2)
+as
+begin
+mo_id:='MO_'||medical_officer_id_gen.nextval;
+mo_joindate:=to_date(sysdate,'dd-mm-yyyy');
+mo_contract_time:=mo_joindate+60;
+insert into medical_officer(medical_officer_id,medical_officer_name,medical_officer_contracttime,medical_officer_joindate,medical_officer_email,medical_officer_password)
+values(mo_id,mo_name,mo_contract_time,mo_joindate,mo_email,mo_password);
+end;
+
+declare
+a nvarchar2(50);
+b date;
+c date;
+begin
+create_medical_officer(a,'Dr. Hafiz Kabir',b,c,'hk@gmail.com','12345');
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--Tester table
+create table tester(
+
+     test_id  nvarchar2(64) not null, 
+     tester_result   nvarchar2(64) default null,
+     medical_officer_id nvarchar2(64) not null,
+     
+     CONSTRAINT tester_medical_officer_id_fk FOREIGN KEY (medical_officer_id)
+     REFERENCES medical_officer(medical_officer_id) on delete set null,
+     
+     CONSTRAINT tester_test_id_fk FOREIGN KEY (test_id)
+     REFERENCES eligibility_test(test_id) on delete set null
+);
+
+create view test_view as
+select et.test_id,et.test_date,d.req_id ,p.person_name,
+                    p.person_bloodgroup,d.req_type,d.req_event,et.state ,d.req_state from donation_request d ,
+                    eligibility e,person p,eligibility_test et
+                    where e.eligibility_request_id=d.req_id and p.person_id=e.eligibility_person_id 
+                    and e.eligibility_test_id=et.test_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table eligibility(
+     eligibility_person_id nvarchar2(64),
+     eligibility_request_id nvarchar2(64),
+     eligibility_test_id nvarchar2(64),
+     
+     
+     CONSTRAINT eligibility_person_id_fk FOREIGN KEY (eligibility_person_id)
+     REFERENCES person(person_id) on delete set null,
+     
+     CONSTRAINT eligibility_test_id_fk FOREIGN KEY (eligibility_test_id)
+     REFERENCES eligibility_test(test_id) on delete set null,
+     
+     CONSTRAINT eligibility_request_id_fk FOREIGN KEY (eligibility_request_id)
+     REFERENCES donation_request(req_id) on delete set null
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table billing(
+     billing_id nvarchar2(64),
+     billing_total_amount number default 0,
+     billing_payment_date date,
+     billing_transaction_id nvarchar2(64),
+     CONSTRAINT billing_id_pk PRIMARY KEY (billing_id)
+);
+
+
+create sequence billing_id_gen
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+create sequence billing_txid_gen
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+create or replace procedure 
+create_billing(b_id out nvarchar2,b_total in nvarchar2,b_date in date,t_id out nvarchar2,req_id in nvarchar2)
+as
+begin
+b_id:='B_'||billing_id_gen.nextval;
+t_id:='TX_000000'||billing_txid_gen.nextval;
+insert into billing(billing_id,billing_total_amount,billing_payment_date,billing_transaction_id)
+values(b_id,b_total,b_date,t_id);
+update purchase_request set purchase_billing_id=b_id where purchase_request_id=req_id; 
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table purchase_request(
+     purchase_billing_id nvarchar2(64) ,
+     purchase_org_id nvarchar2(64) ,
+     purchase_person_id nvarchar2(64),
+     
+     purchase_request_id nvarchar2(64) ,
+     purchase_request_status nvarchar2(64),
+     purchase_reason nvarchar2(64),
+     purchase_request_date date,
+     purchase_desired_product nvarchar2(64),
+     purchase_blood_group nvarchar2(64),
+     purchase_blood_type nvarchar2(64),
+     
+     CONSTRAINT purchase_request_id_pk PRIMARY KEY (purchase_request_id),
+     
+     CONSTRAINT purchase_billing_id_fk FOREIGN KEY (purchase_billing_id)
+     REFERENCES billing(billing_id) on delete set null,
+     
+     CONSTRAINT purchase_org_id_fk FOREIGN KEY (purchase_org_id)
+     REFERENCES organization(org_id) on delete set null,
+     
+     CONSTRAINT purchase_person_id_fk FOREIGN KEY (purchase_person_id)
+     REFERENCES person(person_id) on delete set null
+
+);
+
+create sequence request_id_gen
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+create or replace procedure 
+create_request (r_id out nvarchar2,r_status in nvarchar2,r_bloodgroup in nvarchar2,r_bloodtype in nvarchar2,r_reason in nvarchar2,r_date in date,r_desired in nvarchar2,r_billingid in nvarchar2,r_orgid in nvarchar2,r_personid in nvarchar2)
+as
+begin
+r_id:='Req_'||request_id_gen.nextval;
+
+insert into purchase_request(purchase_request_id,purchase_request_status,purchase_blood_group,purchase_blood_type,purchase_reason,purchase_request_date,purchase_desired_product,purchase_billing_id,purchase_org_id,purchase_person_id)
+values(r_id,r_status,r_bloodgroup,r_bloodtype,r_reason,r_date,r_desired,null,r_orgid,r_personid);
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --Blood Bank
 create table blood_bank(
@@ -397,183 +703,6 @@ create  view product_view as
 select  blood_bank_blood_group as "Blood Group", blood_bank_blood_type as "Blood Type",max(blood_bank_total_no)as "Available Bags" from blood_bank where max(blood_bank_total_no)>0 group by blood_bank_blood_group,blood_bank_blood_type order by blood_bank_blood_group;
 select * from product_view;
 
-create table organization(
- org_id      nvarchar2(64) not null, 
- org_email  nvarchar2(64) not null,
- org_city nvarchar2(64) not null,
- org_postal nvarchar2(64) not null,
- org_branch nvarchar2(64) not null,
- org_street nvarchar2(64) not null,
- org_name nvarchar2(64) not null,
- org_no_of_purchase number default 0,
- org_pass nvarchar2(64) not null,
- CONSTRAINT organization_org_id_pk PRIMARY KEY (org_id)
-);
-
-create sequence org_id_gen
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1;
-
---Organization
-create or replace procedure create_organization(o_id out nvarchar2,o_email in nvarchar2,o_city in nvarchar2,o_postal in nvarchar2,
-o_branch in nvarchar2,o_street in nvarchar2,o_name in nvarchar2,o_pass in nvarchar2)
-as 
-begin
-o_id:='O_'||org_id_gen.nextval;
-insert into organization(org_id,org_email,org_city,org_postal,org_branch,org_street,org_name,org_pass) 
-values(o_id,o_email,o_city,o_postal,o_branch,o_street,o_name,o_pass);
-end;
-
-declare
-a nvarchar2(50);
-begin
-create_organization(a,'area@gmail.com','dhaka','2222','dhanmondi','road 11','Port Bank','1234');
-end;
-
-create table admin
-(
-    id nvarchar2(64) primary key,
-    username nvarchar2(64),
-    email nvarchar2(64),
-    password nvarchar2(64)
-);
-
-insert into admin (username,email,password) values ('Raiyan','raiyan.jahangir@gmail.com','12345');
-update admin set username='Robin' , email='robin@yahoo.com' where id='3';
-commit;
-select * from admin;
-
-create sequence admin_id_gen start with 1;
-CREATE OR REPLACE TRIGGER admin_bir 
-BEFORE INSERT ON admin 
-FOR EACH ROW
-
-BEGIN
-  SELECT admin_id_gen.NEXTVAL
-  INTO   :new.id
-  FROM   dual;
-END;
-
-drop sequence admin_id_gen;
-drop trigger admin_bir;
-select * from admin;
-select * from person;
-select * from donation_request;
-select * from organization;
-select * from medical_officer;
-select * from eligibility;
-select * from eligibility_test;
-select * from blood_bank;
-
-create table purchase_request(
-     purchase_billing_id nvarchar2(64) ,
-     purchase_org_id nvarchar2(64) ,
-     purchase_person_id nvarchar2(64),
-     
-     purchase_request_id nvarchar2(64) ,
-     purchase_request_status nvarchar2(64),
-     purchase_reason nvarchar2(64),
-     purchase_request_date date,
-     purchase_desired_product nvarchar2(64),
-     purchase_blood_group nvarchar2(64),
-     purchase_blood_type nvarchar2(64),
-     
-     CONSTRAINT purchase_request_id_pk PRIMARY KEY (purchase_request_id),
-     
-     CONSTRAINT purchase_billing_id_fk FOREIGN KEY (purchase_billing_id)
-     REFERENCES billing(billing_id) on delete set null,
-     
-     CONSTRAINT purchase_org_id_fk FOREIGN KEY (purchase_org_id)
-     REFERENCES organization(org_id) on delete set null,
-     
-     CONSTRAINT purchase_person_id_fk FOREIGN KEY (purchase_person_id)
-     REFERENCES person(person_id) on delete set null
-
-);
-
-create sequence request_id_gen
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1;
-
-create or replace procedure 
-create_request (r_id out nvarchar2,r_status in nvarchar2,r_bloodgroup in nvarchar2,r_bloodtype in nvarchar2,r_reason in nvarchar2,r_date in date,r_desired in nvarchar2,r_billingid in nvarchar2,r_orgid in nvarchar2,r_personid in nvarchar2)
-as
-begin
-r_id:='Req_'||request_id_gen.nextval;
-
-insert into purchase_request(purchase_request_id,purchase_request_status,purchase_blood_group,purchase_blood_type,purchase_reason,purchase_request_date,purchase_desired_product,purchase_billing_id,purchase_org_id,purchase_person_id)
-values(r_id,r_status,r_bloodgroup,r_bloodtype,r_reason,r_date,r_desired,null,r_orgid,r_personid);
-end;
-
-
-create table billing(
-     billing_id nvarchar2(64),
-     billing_total_amount number default 0,
-     billing_payment_date date,
-     billing_transaction_id nvarchar2(64),
-     CONSTRAINT billing_id_pk PRIMARY KEY (billing_id)
-);
-
-
-create sequence billing_id_gen
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1;
-
-create sequence billing_txid_gen
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1;
-
-create or replace procedure 
-create_billing(b_id out nvarchar2,b_total in nvarchar2,b_date in date,t_id out nvarchar2,req_id in nvarchar2)
-as
-begin
-b_id:='B_'||billing_id_gen.nextval;
-t_id:='TX_000000'||billing_txid_gen.nextval;
-insert into billing(billing_id,billing_total_amount,billing_payment_date,billing_transaction_id)
-values(b_id,b_total,b_date,t_id);
-update purchase_request set purchase_billing_id=b_id where purchase_request_id=req_id; 
-end;
-
-
-create table blood_bank(
-     blood_bank_event_id nvarchar2(64),
-     blood_request_id nvarchar2(64),
-     blood_bank_donor_id nvarchar2(64),
-     blood_bank_patient_id nvarchar2(64),
-     blood_Bank_test_id nvarchar2(64),
-
-     blood_bank_blood_bag_id nvarchar2(64),
-     blood_bank_blood_group nvarchar2(10),
-     blood_bank_blood_type nvarchar2(64),
-     blood_datedonation date ,
-     blood_bank_total_no number,
-     blood_expiration_date date,
-     
-     CONSTRAINT blood_bank_bag_id_pk PRIMARY KEY (blood_bank_blood_bag_id),
-     
-     CONSTRAINT blood_bank_event_id_fk FOREIGN KEY (blood_bank_event_id)
-     REFERENCES event(event_id) on delete set null,
-     
-     CONSTRAINT blood_bank_request_id_fk FOREIGN KEY (blood_request_id)
-     REFERENCES purchase_request(purchase_request_id) on delete set null,
-     
-     CONSTRAINT blood_bank_donor_id_fk FOREIGN KEY (blood_bank_donor_id)
-     REFERENCES person(person_id) on delete set null,
-     
-     CONSTRAINT blood_bank_patient_id_fk FOREIGN KEY (blood_bank_patient_id)
-     REFERENCES person(person_id) on delete set null,
-     
-     CONSTRAINT blood_Bank_test_id_fk FOREIGN KEY (blood_Bank_test_id)
-     REFERENCES eligibility_test(test_id) on delete set null
-    
-     
-);
-create sequence blood_bag_id_gen START WITH 1;
-
 select blood_bank_total_no into a from blood_bank where blood_expiration_date<sysdate;
 ---
 select * from blood_bank;
@@ -608,15 +737,15 @@ update blood_bank set blood_bank_total_no=(bb_total-a) where blood_bank_blood_gr
 end;
 
 
---Inserting a blood bag
+--Inputing bag in blood bank
 create or replace procedure 
-create_blood_bag (bb_id out nvarchar2,p_id in nvarchar2,bb_grp in nvarchar2,bb_type in nvarchar2,bb_dd out date,bb_total out number,
+place_donation_request(bb_id out nvarchar2,p_id in nvarchar2,bb_grp in nvarchar2,bb_type in nvarchar2,bb_dd out date,bb_total out number,
 bb_expire out date,bb_event in nvarchar2,bb_event_id out nvarchar2,bb_test_id out nvarchar2,d_id in nvarchar2)
 as
 begin
 bb_id:='BB_'||blood_bag_id_gen.nextval;
 bb_dd:=to_date(sysdate,'dd-mm-yyyy');
-If bb_event='none' then bb_event_id:=null;
+If bb_event='none' or bb_event='None' or bb_event=null  then bb_event_id:=null;
 else 
  select event_id into bb_event_id from event where event_name=bb_event;
 end if;
@@ -644,37 +773,27 @@ end if;
 insert into blood_bank(blood_bank_blood_bag_id,blood_bank_blood_group,blood_bank_blood_type,blood_datedonation,blood_bank_total_no,
 blood_expiration_date,blood_bank_event_id,blood_request_id,blood_bank_donor_id,blood_bank_patient_id,blood_Bank_test_id)
 values(bb_id,bb_grp,bb_type,bb_dd,bb_total,bb_expire,bb_event_id,null,p_id,null,bb_test_id);
+select person_no_of_donation into bb_total from person where person_id=p_id;
+bb_total:=bb_total+1;
+update person set person_no_of_donation=bb_total where person_id=p_id;
 Update donation_request set req_state='DONATED' where req_id=d_id;
 end;
 
 
-declare
-a nvarchar2(50);
-b nvarchar2(50);
-c date;
-d number;
-e date;
-f nvarchar2(50);
-g nvarchar2(50);
-begin
-create_blood_bag(a,'C_1','A+',upper('Plasma'),c,d,e,'none',f,g,'DR_6');
-end;
-commit;
-select * from donation_request;
-select * from blood_bank;
-delete from blood_bank;
-select * from person order by person_id;
-select * from eligibility_test;
-select * from eligibility;
-select * from person;
-select * from event;
 
-create table contact
-(
-    name nvarchar2(50),
-    email nvarchar2(50),
-    phone nvarchar2(50),
-    message nvarchar2(50),
-    time date
-);
 
+set serveroutput on;
+DECLARE
+a nVARCHAR2(64);
+req_overwrite exception;
+BEGIN
+select req_state into a  from donation_request where req_id='DR_1';
+IF a = 'DONATED' THEN
+RAISE req_overwrite;
+END IF;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+DBMS_OUTPUT.PUT_LINE('No data found');
+WHEN req_overwrite THEN
+DBMS_OUTPUT.PUT_LINE('same req overwritten');
+END;
