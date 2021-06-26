@@ -5,12 +5,12 @@
 <body>
     <?php
     include_once 'database.php';
-    include "navbar.php";
+    include 'navbar.php';
     $_SESSION['login']=0;
     $_SESSION['billing']=1;
     $_SESSION['donate']=0;
     $_SESSION['profile']=0;
-    $_SESSION['plogin'] = false;
+    $_SESSION['plogin'] = true;
     include "header-small.php";
     ?>
 <!--==================================

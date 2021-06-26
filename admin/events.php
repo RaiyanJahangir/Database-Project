@@ -91,7 +91,7 @@ include('includes/navbar.php');
 //$query_run=oci_execute($query);
 //}
 //else{
-  $query=oci_parse($connection,"select * from event order by event_id");
+  $query=oci_parse($connection,"select * from event ");
   $query_run=oci_execute($query);
 //}
 

@@ -16,11 +16,11 @@ if(isset($_POST['save']))
 	
 
 	$query = oci_parse($conn, "declare
-	a nvarchar2(50);
-	begin
-	create_organization(a,'$email','$address_city','$address_postal','$address_city','$address_postal',
-	'$nam','$pass');
-	end;");
+							a nvarchar2(50);
+							begin
+							create_organization(a,'$email','$address_city','$address_postal','$address_city','$address_postal',
+							'$nam','$pass');
+							end;");
 	$result = oci_execute($query);
 	if ($result) {
 				include 'login.php';

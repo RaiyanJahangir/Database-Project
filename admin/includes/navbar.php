@@ -71,7 +71,9 @@
       <a class="collapse-item" href="CreateMedicalOfficer.php">Medical Officers</a>
       <a class="collapse-item" href="Person.php">Users</a>
       <a class="collapse-item" href="check_contacts.php">Contacts</a>
+      <!--<a class="collapse-item" href="donation_rqst.php">Donation Requests</a>-->
       <a class="collapse-item" href="events.php">Events</a>
+      <a class="collapse-item" href="adminbloodlist.php">Blood List</a>
     </div>
   </div>
 </li>
@@ -88,7 +90,7 @@
 <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
     <i class="fas fa-fw fa-folder"></i>
-    <span>Pages</span>
+    <span>Purchase</span>
   </a>
   <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
@@ -97,6 +99,7 @@
       <a class="collapse-item" href="bloodbank.php">Blood Bank Info</a>
       <a class="collapse-item" href="orgpurchaseinfo.php">Organization Purchase Info</a>
       <a class="collapse-item" href="join.php">blood bag details</a>
+      <a class="collapse-item" href="search.php">Search person </a>
       <div class="collapse-divider"></div>
       <h6 class="collapse-header">Other Pages:</h6>
       <a class="collapse-item" href="404.html">404 Page</a>

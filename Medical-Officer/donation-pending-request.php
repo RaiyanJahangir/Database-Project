@@ -12,7 +12,7 @@
     include_once '../database.php';
     include "navbar.php";
     include "header-small.php";
-    //echo $mid=$_SESSION['mid'];
+    echo $mid=$_SESSION['mid'];
     ?>
     <br>
     <br>
@@ -36,7 +36,7 @@
                     <th>Invitation</th>
                     <th>Test Result</th>
                     <th>Donated Blood</th>
-                    <th>Did Not Donate Blood</th>
+                    <th>Did Not Donated Blood</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +54,7 @@
                     if($row['REQ_EVENT']===null)$event="empty";
                     else $event=$row['REQ_EVENT'];
                     $query = oci_parse($conn, "SELECT p.person_name,p.person_bloodgroup,p.person_id FROM person p,eligibility e,donation_request d
-                                        where p.person_id=e.eligibility_person_id and e.eligibility_request_id = '$id'");
+                                                where p.person_id=e.eligibility_person_id and e.eligibility_request_id = '$id'");
                     oci_execute($query);
                     $row = oci_fetch_array($query, OCI_BOTH);
                     $name=$row[0];

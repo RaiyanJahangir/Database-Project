@@ -6,7 +6,7 @@ include "database.php";
 $_SESSION['profile']=1;
 $_SESSION['login']=0;
 $_SESSION['donate']=0;
- $id=$_SESSION['pid'];
+$id=$_SESSION['pid'];
 
 $query=oci_parse($conn,"select * from person where person_id='$id'");
 oci_execute($query);
@@ -39,8 +39,8 @@ include "header-small.php";
               <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
               <li><a href="donation_req_check.php"> <i class="fa fa-edit"></i> Donation Request Check</a></li>
               <li><a href="purchasetable.php"> <i class="fa fa-edit"></i> Purchase List</a></li>
-              <li class="active"><a href="contact.php"> <i class="fa fa-user"></i> Contact with admin</a></li>
               <li><form action="profile_edit.php" method="post">
+
                   <input type="hidden" name="edit_id" value="<?php //echo $_SESSION['pid'] 
                   echo $row['PERSON_ID']
                   ?>">
@@ -119,15 +119,14 @@ include "header-small.php";
                       echo $row['PERSON_PORTAL'];?></p>
                   </div>
                   <div class="bio-row">
-                      <p><span>No. of Donation </span>: 
-                      <?php
-                            echo $row['PERSON_NO_OF_DONATION'];
-		                ?>
-                      </p>
+                      <p><span>No. of Purchase </span>: <?php echo strval($row['PERSON_NO_OF_PURCHASE']); ?></p>
                   </div>
                   <div class="bio-row">
-                      <p><span>No. of Purchase </span>: <?php echo $row['PERSON_NO_OF_PURCHASE'];?></p>
+                      <p><span>No. of Donation </span>: <?php echo $row['PERSON_NO_OF_DONATION'];?>
+                      
+                      </p>
                   </div>
+                  
                   
               </div>
           </div>

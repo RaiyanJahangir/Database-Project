@@ -75,7 +75,7 @@ include('includes/navbar.php');
 
 
 
-$query=oci_parse($connection,"select * from person order by person_id");
+$query=oci_parse($connection,"select * from person");
 $query_run=oci_execute($query);
 
 
@@ -133,9 +133,11 @@ $query_run=oci_execute($query);
 
             <td><?php  echo $row['PERSON_NAME']; ?></td>
 
-            <td><?php  echo $row['PERSON_EMAIL']; ?></td>
+            <td><?php error_reporting(0); if($row['PERSON_EMAIL']=="") ECHO "none";
+            else echo $row['PERSON_EMAIL']; ?></td>
 
-            <td><?php  echo $row['PERSON_PASSWORD']; ?></td>
+            <td><?php error_reporting(0); if($row['PERSON_PASSWORD']=="") echo "none";
+            else  echo $row['PERSON_PASSWORD']; ?></td>
 
             <td><?php  echo $row['PERSON_PHONENUMBER']; ?></td>
 

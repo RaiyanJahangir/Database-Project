@@ -45,14 +45,14 @@ if(isset($_POST['update_person_btn'])){
 if(isset($_POST['update_org_btn'])){
 
 
-     $id=$_POST['edit_id'];
-     $name=$_POST['edit_username'];
-     $email=$_POST['edit_email'];
-     $password=$_POST['edit_password'];
-     $branch=$_POST['edit_branch'];
-     $street=$_POST['edit_street'];
-     $city=$_POST['edit_city'];
-     $postal=$_POST['edit_postal'];
+    echo $id=$_POST['edit_id'];
+    echo $name=$_POST['edit_username'];
+    echo $email=$_POST['edit_email'];
+    echo $password=$_POST['edit_password'];
+    echo $branch=$_POST['edit_branch'];
+    echo $street=$_POST['edit_street'];
+    echo $city=$_POST['edit_city'];
+    echo $postal=$_POST['edit_postal'];
  
 
     

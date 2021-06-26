@@ -53,9 +53,9 @@ include('includes/navbar.php');
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">DETAILS BLOOD BAG INFO
-            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-              Add Person Profile 
-            </button>-->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+              
+            </button>
     </h6>
   </div>
 
@@ -76,8 +76,10 @@ include('includes/navbar.php');
 
 
 $query=oci_parse($connection,"select b.blood_bank_blood_bag_id,b.blood_bank_donor_id,b.blood_bank_patient_id,r.purchase_person_id
-                              from blood_bank b,purchase_Request r
-                              where b.blood_Request_id=r.purchase_Request_id");
+from blood_bank b natural join purchase_Request r
+where b.blood_Request_id=r.purchase_Request_id
+AND r.purchase_Request_id is not null
+and b.blood_bank_patient_id is not null");
 $query_run=oci_execute($query);
 
 
@@ -117,9 +119,12 @@ $query_run=oci_execute($query);
 
                 <td><?php  echo $row['BLOOD_BANK_DONOR_ID']; ?></td>
 
-                <td><?php  echo $row['BLOOD_BANK_PATIENT_ID']; ?></td>
+                <td><?php error_reporting();
+                          if($row['BLOOD_BANK_PATIENT_ID']=="") echo "none";
+                           else echo $row['BLOOD_BANK_PATIENT_ID']; ?></td>
 
-                 <td><?php  echo $row['PURCHASE_PERSON_ID']; ?></td> 
+                 <td><?php if($row['PURCHASE_PERSON_ID']=="") echo "none";
+                           else echo $row['PURCHASE_PERSON_ID']; ?></td> 
 
     
 

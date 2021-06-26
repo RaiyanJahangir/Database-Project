@@ -25,8 +25,8 @@ include "database.php";
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="profile.php"> <i class="fa fa-user"></i> Profile</a></li>
               <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
-              <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
               <li><a href="donation_req_check.php"> <i class="fa fa-edit"></i> Donation Request Check</a></li>
+              <li><a href="purchasetable.php"> <i class="fa fa-edit"></i> Purchase Request</a></li>
           </ul>
       </div>
   </div>

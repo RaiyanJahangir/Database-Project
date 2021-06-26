@@ -59,10 +59,11 @@ if(isset($_POST['save']))
     $query_string="declare
     a nvarchar2(50);
     b numeric;
+    c numeric;
     begin
-    create_person(a,'$name','','','$phone','$job','$height','$weight','$blood','$gender','$history','$chronic','$apartment','$street' ,'$city','$portal','$birth' , to_date('$dob','yyyy-mm-dd'),b);
+    create_person(a,'$name','','','$phone','$job','$height','$weight','$blood','$gender','$history','$chronic','$apartment','$street' ,'$city','$portal','$birth' , to_date('$dob','yyyy-mm-dd'),b,c);
     end;";
-    echo $query_string;
+    //echo $query_string;
 	$query = oci_parse($conn,$query_string);
 	$result = oci_execute($query);
     //echo "name";
@@ -72,8 +73,8 @@ if(isset($_POST['save']))
     $row = oci_fetch_array($query,OCI_RETURN_NULLS+OCI_ASSOC);
     
     $maxid=$row['MAX(PERSON_ID)'];
-    echo $_SESSION['pid'];
-    echo $maxid;
+    //echo $_SESSION['pid'];
+    //echo $maxid;
     $_SESSION[$_SESSION['pid']]=$maxid;
           
 	//$query = oci_parse($conn, "INSERT INTO person_SIGNIN(person_name,person_email,person_height,person_weight,person_phonenumber,person_bloodgroup,person_dob,person_gender,person_prevhistory,person_chronicdis,person_profession,person_apartment,person_street,person_city,person_portal,person_password) values ('$name','$email','$height','$weight','$phone','$blood','$dob','$gender','$history','$chronic','$job','$apartment','$street','$city','$portal','$password')");

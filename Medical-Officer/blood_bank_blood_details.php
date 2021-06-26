@@ -33,7 +33,10 @@
             <tbody>
                     <?php
                     error_reporting(0);
-                    $stid = oci_parse($conn, 'select * from product_view');
+                    $stid = oci_parse($conn, 'select  blood_bank_blood_group , blood_bank_blood_type ,max(blood_bank_total_no) 
+from blood_bank 
+where trunc(sysdate) <= blood_expiration_date
+group by blood_bank_blood_group,blood_bank_blood_type order by blood_bank_blood_group');
                     oci_execute($stid);
                     while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                     ?><tr><td><?php echo $row[0] ?></td><?php

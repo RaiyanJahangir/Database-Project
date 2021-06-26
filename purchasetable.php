@@ -55,7 +55,7 @@ include 'header-small.php';
                 <?php
                 $reqid=$_SESSION['pid'];
                 $query = "SELECT * FROM purchase_request
-                where purchase_person_id='$reqid'";
+                where purchase_person_id='$reqid' order by purchase_person_id";
                 $stid = oci_parse($conn, $query);
                 oci_execute($stid);
                 //$reqid=$_SESSION['pid'];
